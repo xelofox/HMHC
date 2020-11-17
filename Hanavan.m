@@ -140,3 +140,8 @@ Head.volume=Volume_SE_group(Head);
 U_Trunk.volume=Volume_ES_group(U_Trunk);
 M_Trunk.volume=Volume_ES_group(M_Trunk);
 L_Trunk.volume=Volume_ES_group(L_Trunk);
+
+Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volume+2*Thigh.volume+...
+    Head.volume+U_Trunk.volume+M_Trunk.volume+L_Trunk.volume;
+
+    
