@@ -3,7 +3,7 @@
 fclose("all");
 f=fopen('slowArm.drf');
 i=1;
-char='azer';
+char='azerty';
 while ~isempty(char)
     char=fread(f,1, 'uint8=>char');
     if char=='t'
