@@ -1,3 +1,5 @@
+%Made by Nicolas Testard if there is any question
+
 %% Hanavan parameters
 P=[ 0.1940;
     0.1000;
@@ -145,7 +147,7 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
     Head.volume+U_Trunk.volume+M_Trunk.volume+L_Trunk.volume;
 
 %% Mass
-Mtot=70;
+Mtot=82.4595;
 
 Hand.m=Mtot*Hand.volume/Vtot;
 Forearm.m=Mtot*Forearm.volume/Vtot;

@@ -1,3 +1,5 @@
+%Made by Nicolas Testard if there is any question
+
 function CoM=CoM_ES_group(segment)
 a1=segment.a1;
 b1=segment.b1;
