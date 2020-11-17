@@ -147,7 +147,8 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
     Head.volume+U_Trunk.volume+M_Trunk.volume+L_Trunk.volume;
 
 %% Mass
-Mtot=82.4595;
+%Mtot=82.4595;
+Mtot=80;
 
 Hand.m=Mtot*Hand.volume/Vtot;
 Forearm.m=Mtot*Forearm.volume/Vtot;
