@@ -130,3 +130,13 @@ L_Trunk.b1=L_Trunk.b0;
 L_Trunk.L=P(13);
 
 %% Volume
+Hand.volume=Volume_SE_group(Hand);
+Forearm.volume=Volume_ES_group(Forearm);
+Upperarm.volume=Volume_ES_group(Upperarm);
+Foot.volume=Volume_ES_group(Foot);
+Shank.volume=Volume_ES_group(Shank);
+Thigh.volume=Volume_ES_group(Thigh);
+Head.volume=Volume_SE_group(Head);
+U_Trunk.volume=Volume_ES_group(U_Trunk);
+M_Trunk.volume=Volume_ES_group(M_Trunk);
+L_Trunk.volume=Volume_ES_group(L_Trunk);
