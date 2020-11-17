@@ -1,3 +1,5 @@
+%Made by Nicolas Testard if there is any question
+
 fclose("all");
 f=fopen('slowArm.drf');
 i=1;
