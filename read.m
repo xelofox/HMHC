@@ -3,20 +3,20 @@
 %second: unknown use of the value
 
 fclose("all");
-f=fopen('slowArm.drf');
+file=fopen('slowArm.drf');
 ind_time=1;
 char='azerty';
 while ~isempty(char)
-    char=fread(f,1, 'uint8=>char');
+    char=fread(file,1, 'uint8=>char');
     if char=='t'
-        char2=fread(f,1, 'uint8=>char');
+        char2=fread(file,1, 'uint8=>char');
         if char2=='s'
             %% Time
-            char3=fread(f,1, 'uint8=>char');
+            char3=fread(file,1, 'uint8=>char');
             time='';
             while (char3 ~='d')
                 time=strcat(time,char3);
-                char3=fread(f,1, 'uint8=>char');
+                char3=fread(file,1, 'uint8=>char');
             end
             time=time(1:end-1);
             Time(ind_time)=str2double(time);
@@ -29,7 +29,7 @@ while ~isempty(char)
             while ind_segment<=17
                 ind=0;
                 while ind<2
-                    char3=fread(f,1, 'uint8=>char');
+                    char3=fread(file,1, 'uint8=>char');
                     if char3=='['
                         ind=ind+1;
                     end
@@ -38,26 +38,26 @@ while ~isempty(char)
                 %first
                 vec=zeros(1,6);
                 for ind_vec=1:6
-                    char3=fread(f,1, 'uint8=>char');
+                    char3=fread(file,1, 'uint8=>char');
                     val='';
                     while (char3~=' ')&&(char3~=']')
                         val=strcat(val,char3);
-                        char3=fread(f,1, 'uint8=>char');
+                        char3=fread(file,1, 'uint8=>char');
                     end
                     vec(ind_vec)=str2double(val);
                 end
                 pos1(ind_segment,:)=vec;
                 
-                fread(f,1, 'uint8=>char');%skip '['
+                fread(file,1, 'uint8=>char');%skip '['
                 
                 %second
                 vec=zeros(1,9);
                 for ind_vec=1:9
-                    char3=fread(f,1, 'uint8=>char');
+                    char3=fread(file,1, 'uint8=>char');
                     val='';
                     while (char3~=' ')&&(char3~=']')
                         val=strcat(val,char3);
-                        char3=fread(f,1, 'uint8=>char');
+                        char3=fread(file,1, 'uint8=>char');
                     end
                     vec(ind_vec)=str2double(val);
                 end
@@ -75,4 +75,4 @@ end
 
 fclose("all");
 
-clear char char2 char3 ind ind_segment ind_time pos1 pos2 time val vec f ind_vec
+clear char char2 char3 ind ind_segment ind_time pos1 pos2 time val vec file ind_vec
