@@ -1,3 +1,5 @@
+%Made by Nicolas Testard if there is any question
+
 %% Hanavan parameters
 P=[ 0.1940;
     0.1000;
@@ -130,3 +132,44 @@ L_Trunk.b1=L_Trunk.b0;
 L_Trunk.L=P(13);
 
 %% Volume
+Hand.volume=Volume_SE_group(Hand);
+Forearm.volume=Volume_ES_group(Forearm);
+Upperarm.volume=Volume_ES_group(Upperarm);
+Foot.volume=Volume_ES_group(Foot);
+Shank.volume=Volume_ES_group(Shank);
+Thigh.volume=Volume_ES_group(Thigh);
+Head.volume=Volume_SE_group(Head);
+U_Trunk.volume=Volume_ES_group(U_Trunk);
+M_Trunk.volume=Volume_ES_group(M_Trunk);
+L_Trunk.volume=Volume_ES_group(L_Trunk);
+
+Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volume+2*Thigh.volume+...
+    Head.volume+U_Trunk.volume+M_Trunk.volume+L_Trunk.volume;
+
+%% Mass
+%Mtot=82.4595;
+Mtot=80;
+
+Hand.m=Mtot*Hand.volume/Vtot;
+Forearm.m=Mtot*Forearm.volume/Vtot;
+Upperarm.m=Mtot*Upperarm.volume/Vtot;
+Foot.m=Mtot*Foot.volume/Vtot;
+Shank.m=Mtot*Shank.volume/Vtot;
+Thigh.m=Mtot*Thigh.volume/Vtot;
+Head.m=Mtot*Head.volume/Vtot;
+U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
+M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
+L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
+
+
+%% Inertia
+Hand.inertia=Inertia_SE_group(Hand);
+Forearm.inertia=Inertia_ES_group(Forearm);
+Upperarm.inertia=Inertia_ES_group(Upperarm);
+Foot.inertia=Inertia_ES_group(Foot);
+Shank.inertia=Inertia_ES_group(Shank);
+Thigh.inertia=Inertia_ES_group(Thigh);
+Head.inertia=Inertia_SE_group(Head);
+U_Trunk.inertia=Inertia_ES_group(U_Trunk);
+M_Trunk.inertia=Inertia_ES_group(M_Trunk);
+L_Trunk.inertia=Inertia_ES_group(L_Trunk);
