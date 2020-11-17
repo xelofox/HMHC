@@ -16,7 +16,7 @@ for k=1:1000
             end
             time=time(1:end-1);
         else
-        char=char2
+        char=char2;
         end               
     end
 end
