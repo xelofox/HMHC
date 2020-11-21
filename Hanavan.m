@@ -43,6 +43,7 @@ P=[ 0.1940;
     0.3012;
     0.57725];
 
+
 %% Hanavan model
 
 %Hand
@@ -76,7 +77,7 @@ Foot.group="ES";
 Foot.a0=P(19)/(2*pi);
 Foot.b0=Foot.a0;
 Foot.a1=(P(33)+P(34))/4;
-Foot.b1=(P(20)+P(21))/4;
+Foot.b1=(P(20)+P(21))/(2*pi);
 Foot.L=P(6);
 
 %Shank
@@ -149,33 +150,34 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
 %% Mass
 %Mtot=82.4595;
 Mtot=80;
+P=P*100; % Appropriate values to use when applying lesson prediction mass formula?
 
-Hand.m=Mtot*Hand.volume/Vtot;
-Forearm.m=Mtot*Forearm.volume/Vtot;
-Upperarm.m=Mtot*Upperarm.volume/Vtot;
-Foot.m=Mtot*Foot.volume/Vtot;
-Shank.m=Mtot*Shank.volume/Vtot;
-Thigh.m=Mtot*Thigh.volume/Vtot;
-Head.m=Mtot*Head.volume/Vtot;
-U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
-M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
-L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
+% Hand.m=Mtot*Hand.volume/Vtot;
+% Forearm.m=Mtot*Forearm.volume/Vtot;
+% Upperarm.m=Mtot*Upperarm.volume/Vtot;
+% Foot.m=Mtot*Foot.volume/Vtot;
+% Shank.m=Mtot*Shank.volume/Vtot;
+% Thigh.m=Mtot*Thigh.volume/Vtot;
+% Head.m=Mtot*Head.volume/Vtot;
+% U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
+% M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
+% L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
 
-% Hand.m=0.038*P(15) + 0.080*P(32) - 0.660;
-% Forearm.m= 0.081*Mtot + 0.052*P(16) - 1.650;
-% Upperarm.m=0.007*Mtot + 0.092*P(18) + 0.050*P(5) -3.101;
-% Foot.m= 0.003*Mtot + 0.048*P(22) + 0.027*P(6) - 0.869;
-% Shank.m=0.135*P(23) - 1.318;
-% Thigh.m=0.074*Mtot + 0.138*P(25) - 4.641;
-% Head.m=0.104*P(26) + 0.015*Mtot - 2.189;
-% mwt=0.349*Mtot + 0.423*P(41) + 0.229*P(27) - 35.460;
-% sf=mwt/(0.92 * U_Trunk.volume + 1.01 * (M_Trunk.volume + L_Trunk.volume));
-% U_Trunk.m=0.92*U_Trunk.volume*sf;
-% M_Trunk.m=1.01*M_Trunk.volume*sf;
-% L_Trunk.m=1.01*L_Trunk.volume*sf;
-% 
-% M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trunk.m+L_Trunk.m;
-% disp("Sum of the mass= "+num2str(M)+" kg")
+Hand.m=0.038*P(15) + 0.080*P(32) - 0.660;
+Forearm.m= 0.081*Mtot + 0.052*P(16) - 1.650;
+Upperarm.m=0.007*Mtot + 0.092*P(18) + 0.050*P(5) -3.101;
+Foot.m= 0.003*Mtot + 0.048*P(22) + 0.027*P(6) - 0.869;
+Shank.m=0.135*P(23) - 1.318;
+Thigh.m=0.074*Mtot + 0.138*P(25) - 4.641;
+Head.m=0.104*P(26) + 0.015*Mtot - 2.189;
+mwt=0.349*Mtot + 0.423*P(41) + 0.229*P(27) - 35.460;
+sf=mwt/(0.92 * U_Trunk.volume + 1.01 * (M_Trunk.volume + L_Trunk.volume));
+U_Trunk.m=0.92*U_Trunk.volume*sf;
+M_Trunk.m=1.01*M_Trunk.volume*sf;
+L_Trunk.m=1.01*L_Trunk.volume*sf;
+
+M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trunk.m+L_Trunk.m;
+disp("Sum of the mass= "+num2str(M)+" kg")
 
 %% Inertia
 Hand.inertia=Inertia_SE_group(Hand);

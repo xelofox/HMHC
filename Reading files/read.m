@@ -1,9 +1,9 @@
 %Made by Nicolas Testard if there is any question
 %first: a cell contains the positions and orientation (6 dof) for the 17 segments
 %second: unknown use of the value
-
+Motion="slowArm";
 fclose("all");
-file=fopen('slowArm.drf');
+file=fopen(Motion+".drf");
 ind_time=1;
 char='azerty';
 while ~isempty(char)
@@ -72,5 +72,7 @@ while ~isempty(char)
 end
 
 fclose("all");
+
+save(Motion+"_q",motion)
 
 clear char ind ind_segment ind_time pos1 pos2 time val vec file ind_vec
