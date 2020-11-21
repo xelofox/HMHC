@@ -72,7 +72,29 @@ while ~isempty(char)
 end
 
 fclose("all");
+motion.name=Motion;
+motion.time=Time;
+for k=1:length(Time)
+    values=first{k};
+    motion.q1(:,k)=transpose(values(1,:));
+    motion.q2(:,k)=transpose(values(2,:));
+    motion.q3(:,k)=transpose(values(3,:));
+    motion.q4(:,k)=transpose(values(4,:));
+    motion.q5(:,k)=transpose(values(5,:));
+    motion.q6(:,k)=transpose(values(6,:));
+    motion.q7(:,k)=transpose(values(7,:));
+    motion.q8(:,k)=transpose(values(8,:));
+    motion.q9(:,k)=transpose(values(9,:));
+    motion.q10(:,k)=transpose(values(10,:));
+    motion.q11(:,k)=transpose(values(11,:));
+    motion.q12(:,k)=transpose(values(12,:));
+    motion.q13(:,k)=transpose(values(13,:));
+    motion.q14(:,k)=transpose(values(14,:));
+    motion.q15(:,k)=transpose(values(15,:));
+    motion.q16(:,k)=transpose(values(16,:));
+    motion.q17(:,k)=transpose(values(17,:));
+end
 
-save(Motion+"_q",motion)
+save(Motion+"_q",'motion');
 
-clear char ind ind_segment ind_time pos1 pos2 time val vec file ind_vec
+clear char ind ind_segment ind_time pos1 pos2 time val vec file ind_vec Time first second k Motion values
