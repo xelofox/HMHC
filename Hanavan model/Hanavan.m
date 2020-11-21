@@ -177,7 +177,7 @@ M_Trunk.m=1.01*M_Trunk.volume*sf;
 L_Trunk.m=1.01*L_Trunk.volume*sf;
 
 M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trunk.m+L_Trunk.m;
-disp("Sum of the mass= "+num2str(M)+" kg")
+disp("Sum of the masses= "+num2str(M)+" kg")
 
 %% Inertia
 Hand.inertia=Inertia_SE_group(Hand);
