@@ -2,7 +2,7 @@
 
 function [X1,Y1,Z1]=trans_rot(X,Y,Z,q)
 X1=X; Y1=Y; Z1=Z;
-R=rot_x(-q(4)*pi/180)*rot_y(-q(5)*pi/180)*rot_z(-q(6)*pi/180);
+R=rot_x(q(4)*pi/180)*rot_y(q(5)*pi/180)*rot_z(q(6)*pi/180);
 %R=eye(3);
 for i=1:size(X,1)
     for j=1:size(X,2)
