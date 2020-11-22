@@ -47,7 +47,7 @@ for k=1:L
    
    %L upper arm
    [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q3(:,k));
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.q1(:,k));
    surf(X,Y,Z);
    axis("equal")
    pause(dt)
