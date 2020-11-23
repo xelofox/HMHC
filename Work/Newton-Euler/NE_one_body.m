@@ -22,5 +22,6 @@ I(3,3)=I(3,3)+m*(Si(1)^2+Si(2)^2);
 
 Fi= Fj + m*g + m*qdd(1:3) + m*cross(Omega_d,S0) + m*mrot(Omega)*cross(Omega,S0);
 Mi= Mj + cross(S0,m*g) + (pinv(Rz)*I)*Omega_d + m*cross(S0,qdd(1:3)) + mrot(Omega)*( (pinv(Rz)*I) * Omega );
+Ti= [Mi(1); Rx*Mi(2); Ry*Mi(3)];
 
 end
