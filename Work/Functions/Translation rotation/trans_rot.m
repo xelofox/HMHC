@@ -12,7 +12,7 @@ for i=1:size(X,1)
         Z1(i,j)=v(3);
         
         v=[X1(i,j),Y1(i,j),Z1(i,j)]+transpose(q(1:3))*1e-3;
-        v=rot_z(3*pi/4)*transpose(v); %change orientation when plotting
+        v=rot_z(pi/2)*transpose(v); %change orientation when plotting
         X1(i,j)=v(1);
         Y1(i,j)=v(2);
         Z1(i,j)=v(3);

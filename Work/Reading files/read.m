@@ -2,7 +2,7 @@
 %first: a cell contains the positions and orientation (6 dof) for the 17 segments
 %second: unknown use of the value
 clear
-Motion="slowArm";
+Motion="maxJump";
 fclose("all");
 file=fopen(Motion+".drf");
 ind_time=1;
