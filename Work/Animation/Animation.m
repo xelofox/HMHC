@@ -22,47 +22,117 @@ surf(X,Y,Z)
 L=length(motion.time);
 dt=motion.time(2)-motion.time(1);
 
+
+
 for k=1:L
     hold off
    %head
    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q4(:,k));
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J4(:,k));
    surf(X,Y,Z);
    hold on
    
-   %M_Trunk
-   [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); %Z=Z-M_Trunk.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q8(:,k));
-   surf(X,Y,Z);
-   
-   %L_trunk
-   [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  %Z=Z-L_Trunk.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q5(:,k));
-   surf(X,Y,Z);
+%    %M_Trunk
+%    [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); %Z=Z-M_Trunk.L/2;
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q8(:,k));
+%    surf(X,Y,Z);
+%    
+%    %L_trunk
+%    [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  %Z=Z-L_Trunk.L/2;
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q5(:,k));
+%    surf(X,Y,Z);
    
    %R upper arm
-   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L); % Z=Z-Upperarm.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q1(:,k));
-   surf(X,Y,Z,2*ones(2,21));
+   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J8(:,k));
+   surf(X,Y,Z);
    
    %L upper arm
-   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L); % Z=Z-Upperarm.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q3(:,k));
-   surf(X,Y,Z,2*ones(2,21));
+   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J7(:,k));
+   surf(X,Y,Z);
    
+   %U trunk
+   [X,Y,Z]=elliptical(U_Trunk.a0,U_Trunk.b0,U_Trunk.a1,U_Trunk.b1,U_Trunk.L); Z=Z-U_Trunk.L;
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J3(:,k));
+   surf(X,Y,Z);
+
    %R forearm
-   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  %Z=Z-Forearm.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q11(:,k));
-   surf(X,Y,Z,ones(2,21));
+   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J10(:,k));
+   surf(X,Y,Z);
    
    %L forearm
-   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L/2;
-   [X,Y,Z]=trans_rot(X,Y,Z,motion.q7(:,k));
-   surf(X,Y,Z,ones(2,21));
+   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J9(:,k));
+   surf(X,Y,Z);
+   
+   %R hand
+   [X,Y,Z] = ellipsoid(0,0,0,Hand.a,Hand.b,Hand.c); Z=Z-Hand.c;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J12(:,k));
+   surf(X,Y,Z);
+   
+   %L hand
+   [X,Y,Z] = ellipsoid(0,0,0,Hand.a,Hand.b,Hand.c); Z=Z-Hand.c;
+   [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+   [X,Y,Z]=trans_rot(X,Y,Z,motion.J11(:,k));
+   surf(X,Y,Z);
    
    axis("equal")
    pause(dt)
 end
+
+
+% for k=1:L
+%     hold off
+%    %head
+%    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q4(:,k));
+%    surf(X,Y,Z);
+%    hold on
+%    
+%    %M_Trunk
+%    [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); Z=Z-M_Trunk.L/2;
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q8(:,k));
+%    surf(X,Y,Z);
+%    
+%    %L_trunk
+%    [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  %Z=Z-L_Trunk.L/2;
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q5(:,k));
+%    surf(X,Y,Z);
+%    
+%    %R upper arm
+%    [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L/2;
+%    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q1(:,k));
+%    surf(X,Y,Z,2*ones(2,21));
+%    
+%    %L upper arm
+%    [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L/2;
+%    [X,Y,Z]=Rotation_solid(X,Y,Z,0,-pi/2,0);
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q3(:,k));
+%    surf(X,Y,Z,2*ones(2,21));
+%    
+%    %R forearm
+%    [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L/2;
+%    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q11(:,k));
+%    surf(X,Y,Z,ones(2,21));
+%    
+%    %L forearm
+%    [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L/2;
+%    [X,Y,Z]=Rotation_solid(X,Y,Z,0,-pi/2,0);
+%    [X,Y,Z]=trans_rot(X,Y,Z,motion.q7(:,k));
+%    surf(X,Y,Z,ones(2,21));
+%    
+%    axis("equal")
+%    pause(dt)
+% end
 
 % for k=L:L
 %     hold off
