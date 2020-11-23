@@ -25,33 +25,33 @@ dt=motion.time(2)-motion.time(1);
 for k=1:L
     hold off
    %head
-   [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c);
+   [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q4(:,k));
    surf(X,Y,Z);
    hold on
    
    %M_Trunk
-   [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); Z=Z-M_Trunk.L/2;
+   [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); %Z=Z-M_Trunk.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q8(:,k));
    surf(X,Y,Z);
    
    %L_trunk
-   [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  Z=Z-L_Trunk.L/2;
+   [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  %Z=Z-L_Trunk.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q5(:,k));
    surf(X,Y,Z);
    
    %R upper arm
-   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L/2;
+   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L); % Z=Z-Upperarm.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q1(:,k));
    surf(X,Y,Z,2*ones(2,21));
    
    %L upper arm
-   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L);  Z=Z-Upperarm.L/2;
+   [X,Y,Z]=elliptical(Upperarm.a0,Upperarm.b0,Upperarm.a1,Upperarm.b1,Upperarm.L); % Z=Z-Upperarm.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q3(:,k));
    surf(X,Y,Z,2*ones(2,21));
    
    %R forearm
-   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  Z=Z-Forearm.L/2;
+   [X,Y,Z]=elliptical(Forearm.a0,Forearm.b0,Forearm.a1,Forearm.b1,Forearm.L);  %Z=Z-Forearm.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,motion.q11(:,k));
    surf(X,Y,Z,ones(2,21));
    
