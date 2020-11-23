@@ -190,3 +190,15 @@ Head.inertia=Inertia_SE_group(Head);
 U_Trunk.inertia=Inertia_ES_group(U_Trunk);
 M_Trunk.inertia=Inertia_ES_group(M_Trunk);
 L_Trunk.inertia=Inertia_ES_group(L_Trunk);
+
+%% CoM
+Hand.CoM=[0;0;0];
+Forearm.CoM=CoM_ES_group(Forearm);
+Upperarm.CoM=CoM_ES_group(Upperarm);
+Foot.CoM=CoM_ES_group(Foot);
+Shank.CoM=CoM_ES_group(Shank);
+Thigh.CoM=CoM_ES_group(Thigh);
+Head.CoM=[0;0;0];
+U_Trunk.CoM=CoM_ES_group(U_Trunk);
+M_Trunk.CoM=CoM_ES_group(M_Trunk);
+L_Trunk.CoM=CoM_ES_group(L_Trunk);

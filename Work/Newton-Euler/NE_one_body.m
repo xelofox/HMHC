@@ -4,9 +4,9 @@ function [Ti,Fi,Mi,Ec,Ep]=NE_one_body(Fj,Mj,segment,q,qd,qdd,CoM,Joint)
 x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];
 g=-9.81*y;
 
-Rx=rot_x(q(4)*pi/180);
-Ry=rot_x(q(4)*pi/180)*rot_y(q(5)*pi/180);
-Rz=rot_x(q(4)*pi/180)*rot_y(q(5)*pi/180)*rot_z(q(6)*pi/180);
+Rx=rot_x(q(4));
+Ry=rot_x(q(4))*rot_y(q(5));
+Rz=rot_x(q(4))*rot_y(q(5))*rot_z(q(6));
 
 S0=(CoM-Joint);
 Si=Rz*S0;

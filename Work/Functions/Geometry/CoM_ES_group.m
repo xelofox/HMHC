@@ -7,5 +7,5 @@ a0=segment.a0;
 b0=segment.b0;
 L=segment.L;
 
-CoM=L*A_ab2(a0,a1,b0,b1)/A_ab1(a0,a1,b0,b1);
+CoM=[0;0;L*A_ab2(a0,a1,b0,b1)/A_ab1(a0,a1,b0,b1)];
 end
