@@ -51,16 +51,16 @@ J20=[motion.J20(1:3,:)*1e-3;motion.J20(4:6,:)*pi/180];
 F=zeros(3,size(J1d,2));
 M=F;
 
-for k=1:size(J1d,2)
+for k=1:size(J1,2)
    %head
-   [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,Head,J4(:,k+2),J4d(:,k),J4dd(:,k),J4(1:3,k+2),J4(1:3,k+2));
+   [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,Head,J4(:,k),J4d(:,k),J4dd(:,k),J4(1:3,k),J4(1:3,k));
    F(:,k)=F(:,k)+Fi;
 %    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
 %    [X,Y,Z]=trans_rot(X,Y,Z,motion.J4(:,k));
    
    %U trunk
    CoM=J3(1:3,k)-rot_x(J3(4,k))*rot_y(J3(5,k))*rot_z(J3(6,k))*(U_Trunk.L-U_Trunk.CoM);
-   [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,U_Trunk,J4(:,k+2),J4d(:,k),J4dd(:,k),CoM,J4(1:3,k+2));
+   [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,U_Trunk,J4(:,k),J4d(:,k),J4dd(:,k),CoM,J4(1:3,k));
    F(:,k)=F(:,k)+Fi;
 %    [X,Y,Z]=elliptical(U_Trunk.a0,U_Trunk.b0,U_Trunk.a1,U_Trunk.b1,U_Trunk.L); Z=Z-U_Trunk.L;
 %    [X,Y,Z]=trans_rot(X,Y,Z,motion.J3(:,k));

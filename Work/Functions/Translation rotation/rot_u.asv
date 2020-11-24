@@ -1,0 +1,7 @@
+function R=rot_u(u,theta)
+
+u1=u
+
+if size(u1)
+
+end
