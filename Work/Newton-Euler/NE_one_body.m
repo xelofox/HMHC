@@ -21,7 +21,7 @@ I(2,2)=I(2,2)+m*(Si(1)^2+Si(3)^2);
 I(3,3)=I(3,3)+m*(Si(1)^2+Si(2)^2);
 
 Fi= Fj + m*g + m*qdd(1:3) + m*cross(Omega_d,S0) + m*mrot(Omega)*cross(Omega,S0);
-Mi= Mj + cross(S0,m*g) + (Rz*I)*Omega_d + m*cross(S0,qdd(1:3)) + mrot(Omega)*( Rz*I * Omega );
+Mi= Mj + cross(S0,m*g) + (Rz'*I*Rz)*Omega_d + m*cross(S0,qdd(1:3)) + mrot(Omega)*( Rz'*I*Rz * Omega );
 
 % disp("poid:")
 % disp(m*g)
@@ -36,7 +36,7 @@ T3=Ry*Mi;
 Ti= [T1(1);T2(2);T3(3)];
 
 vm=qd(1:3)+cross(-S0,Omega);
-Ec=0.5*m*vm'*vm+0.5*Omega'*(Rz*I)*Omega;
+Ec=0.5*m*vm'*vm+0.5*Omega'*(Rz'*I*Rz)*Omega;
 Ep=-m*g'*CoM;
 
 
