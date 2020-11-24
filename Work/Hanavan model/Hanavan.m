@@ -1,6 +1,7 @@
 %Made by Nicolas Testard if there is any question
 
 %% Hanavan parameters
+% list of the 41 mean values according to the Hanavan Model (pg 138)
 P=[ 0.1940;
     0.1000;
     0.2836;
@@ -45,6 +46,9 @@ P=[ 0.1940;
 
 
 %% Hanavan model
+%Here we define the phisical properties for each of the 10 body parts
+%According to pg 146 we can see the equations and the definitions for
+%the sahpe and group
 
 %Hand
 Hand.shape="ER";
@@ -133,6 +137,8 @@ L_Trunk.b1=L_Trunk.b0;
 L_Trunk.L=P(13);
 
 %% Volume
+%Here this functions returns us the Volume of each body part. Each body
+%part uses a different Volume equation deppending on the group
 Hand.volume=Volume_SE_group(Hand);
 Forearm.volume=Volume_ES_group(Forearm);
 Upperarm.volume=Volume_ES_group(Upperarm);
@@ -144,10 +150,15 @@ U_Trunk.volume=Volume_ES_group(U_Trunk);
 M_Trunk.volume=Volume_ES_group(M_Trunk);
 L_Trunk.volume=Volume_ES_group(L_Trunk);
 
+%The total volume (taking into account that some of the body parts axists
+%twice)
 Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volume+2*Thigh.volume+...
     Head.volume+U_Trunk.volume+M_Trunk.volume+L_Trunk.volume;
 
 %% Mass
+%For the mass computations, we use the equations from pg 147, which rely on
+%the Hanavan parameters and the total mass of the body
+
 %Mtot=82.4595;
 Mtot=80;
 P=P*100; % Appropriate values to use when applying lesson prediction mass formula?
@@ -170,7 +181,10 @@ Foot.m= 0.003*Mtot + 0.048*P(22) + 0.027*P(6) - 0.869;
 Shank.m=0.135*P(23) - 1.318;
 Thigh.m=0.074*Mtot + 0.138*P(25) - 4.641;
 Head.m=0.104*P(26) + 0.015*Mtot - 2.189;
+%mwt is the mass of the whole trunk used to compute the mass of each part
+%of the trunk
 mwt=0.349*Mtot + 0.423*P(41) + 0.229*P(27) - 35.460;
+%sf is a sclaing factor used to compute the mass of each part of the trunk
 sf=mwt/(0.92 * U_Trunk.volume + 1.01 * (M_Trunk.volume + L_Trunk.volume));
 U_Trunk.m=0.92*U_Trunk.volume*sf;
 M_Trunk.m=1.01*M_Trunk.volume*sf;
@@ -180,6 +194,8 @@ M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trun
 disp("Sum of the masses= "+num2str(M)+" kg")
 
 %% Inertia
+%Here this functions returns us the Inertia of each body part. Each body
+%part uses a different Inertia equation deppending on the group
 Hand.inertia=Inertia_SE_group(Hand);
 Forearm.inertia=Inertia_ES_group(Forearm);
 Upperarm.inertia=Inertia_ES_group(Upperarm);
@@ -192,6 +208,8 @@ M_Trunk.inertia=Inertia_ES_group(M_Trunk);
 L_Trunk.inertia=Inertia_ES_group(L_Trunk);
 
 %% CoM
+%Here we compute the center of mass depending on the group.
+%The SE group are elipsoids or spheres, which mean the relativa CoM = 0
 Hand.CoM=[0;0;0];
 Forearm.CoM=CoM_ES_group(Forearm);
 Upperarm.CoM=CoM_ES_group(Upperarm);

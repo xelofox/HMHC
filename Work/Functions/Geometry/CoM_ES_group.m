@@ -1,5 +1,6 @@
 %Made by Nicolas Testard if there is any question
 
+%We use the equations of pg 128
 function CoM=CoM_ES_group(segment)
 a1=segment.a1;
 b1=segment.b1;

@@ -1,5 +1,5 @@
 %Made by Nicolas Testard if there is any question
-
+%We use the equations of pg 126
 function I=Inertia_SE_group(segment)
 a=segment.a;
 b=segment.b;
