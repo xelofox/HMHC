@@ -4,10 +4,14 @@ function [X1,Y1,Z1]=trans_rot3(X,Y,Z,q)
 X1=X; Y1=Y; Z1=Z;
 %u=[1;0;0];
 %theta=q(4)*pi/180;
+
 theta=norm(q(4:6)*pi/180);
+
 %u=[q(6);q(5);q(4)]*(pi/180)/theta;
+
 u=q(4:6)*(pi/180)/theta;
 R=rot_u(u,theta);
+
 %R=eye(3);
 for i=1:size(X,1)
     for j=1:size(X,2)
