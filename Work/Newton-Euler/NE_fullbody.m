@@ -2,10 +2,24 @@
 
 %Only forces for now
 
+%This seems to be the MAIN program
+%The variable "Motion" descrives the motion that we want to perform with
+%the simulator
+%We currently have 3 possible motions:
+%"slowArm", "mediumKick" and "maxJump"
 Motion="slowArm";
+%We execute the "Hanavan" function that loads the body parameters
 Hanavan;
+%we load the motion file associated to the filename choosen before
+%It contains "qi" vectors which are unused, "Ji" vectors, and the "time" 
+%array
 load(Motion+"_q.mat")
 
+% Each Ji is a combination of vectors of dimension 6. We have as many Ji
+% vectors as values inside the time array.
+
+%we convert the first 3 values of each J vector from mm to m
+%and we convert the last 3 values of each J vector from º to rad
 J1=[motion.J1(1:3,:)*1e-3;motion.J1(4:6,:)*pi/180];
 J2=[motion.J2(1:3,:)*1e-3;motion.J2(4:6,:)*pi/180];
 J3=[motion.J3(1:3,:)*1e-3;motion.J3(4:6,:)*pi/180];
@@ -27,6 +41,8 @@ J18=[motion.J18(1:3,:)*1e-3;motion.J18(4:6,:)*pi/180];
 J19=[motion.J19(1:3,:)*1e-3;motion.J19(4:6,:)*pi/180];
 J20=[motion.J20(1:3,:)*1e-3;motion.J20(4:6,:)*pi/180];
 
+%Here we compute the discrete time derivative and the discrete double time 
+%derivative of the J vector using the time array for the increment
 [J1d,J1dd]=time_diff(J1,motion.time);
 [J2d,J2dd]=time_diff(J2,motion.time);
 [J3d,J3dd]=time_diff(J3,motion.time);
@@ -51,6 +67,8 @@ J20=[motion.J20(1:3,:)*1e-3;motion.J20(4:6,:)*pi/180];
 F=zeros(3,size(J1d,2));
 M=F;
 
+%Here we compute the reactions of each body part using the Newton-Euler
+%equations
 for k=1:size(J1,2)
    %head
    [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,Head,J4(:,k),J4d(:,k),J4dd(:,k),J4(1:3,k),J4(1:3,k));

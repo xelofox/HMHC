@@ -160,6 +160,9 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
 %the Hanavan parameters and the total mass of the body
 
 %Mtot=82.4595;
+%Mtot is an aproximte value of the mass used to compute the mass of each
+%body part
+%The real mass of the hole body is M
 Mtot=80;
 P=P*100; % Appropriate values to use when applying lesson prediction mass formula?
 
@@ -190,6 +193,7 @@ U_Trunk.m=0.92*U_Trunk.volume*sf;
 M_Trunk.m=1.01*M_Trunk.volume*sf;
 L_Trunk.m=1.01*L_Trunk.volume*sf;
 
+%adding all the masses, we get the real total mass M
 M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trunk.m+L_Trunk.m;
 disp("Sum of the masses= "+num2str(M)+" kg")
 

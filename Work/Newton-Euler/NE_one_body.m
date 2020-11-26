@@ -1,5 +1,20 @@
 %Made by Nicolas Testard if there is any question
+%Inputs
+%   Fj = External Force applied to the body
+%   Mj = External Torque applied to the body
+%   segment = Name of the body part (struct variable)
+%   q = vector of positions (Ji)
+%   qd = vector of velocities (Jid)
+%   qdd = vector of accelerations (Jidd)
+%   CoM = ???
+%   Joint = ???
 
+%Outputs
+%   Ti =
+%   Fi = 
+%   Mi = 
+%   Ec = 
+%   Ep =
 function [Ti,Fi,Mi,Ec,Ep]=NE_one_body(Fj,Mj,segment,q,qd,qdd,CoM,Joint)
 x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];
 g=-9.81*y;

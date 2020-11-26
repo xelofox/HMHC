@@ -1,5 +1,7 @@
 %Made by Nicolas Testard if there is any question
 
+%We apply a discrete time derivative to each array of values
+% qd(k)=(q(k+1)-q(k)) / (t(k+1)-t(k));
 function [qd,qdd]=time_diff(q,t)
 
 qd=zeros(size(q,1),size(q,2));
