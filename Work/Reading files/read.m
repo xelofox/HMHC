@@ -71,7 +71,7 @@ while ~isempty(char)
             first{ind_time}=pos1;
             second{ind_time}=pos2;
             
-            %% Third and fourt vectors
+            %% Third and fourth vectors
             ind_joint=1;
             while ind_joint<=20
                 ind=0;
