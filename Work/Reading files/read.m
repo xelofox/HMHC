@@ -4,7 +4,7 @@
 %third: marker position and orientation
 %fourth: unknown
 clear
-Motion="custom";
+Motion="quickJump";
 fclose("all");
 file=fopen(Motion+".drf");
 ind_time=1;
