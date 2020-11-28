@@ -1,6 +1,6 @@
 %Made by Nicolas Testard if there is any question
 
-Motion="slowArm";
+Motion="custom";
 Hanavan;
 load(Motion+"_q.mat")
 
@@ -23,7 +23,7 @@ surf(X,Y,Z)
 
 %% Animation
 
-
+motion=motion_filtered(motion);
 
 L=length(motion.time);
 dt=motion.time(2)-motion.time(1);
