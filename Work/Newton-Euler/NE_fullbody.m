@@ -69,7 +69,41 @@ T=F;
 %equations
 for k=1:nb_step
    %head
-   [Fi,Ti,Ec,Ep]=NE_one_body(0,0,Head,Head.pos(:,k),Head.velocity(:,k),Head.acceleration(:,k),Head.pos(1:3,k));
+   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Head,Head.pos(:,k),Head.velocity(:,k),Head.acceleration(:,k),Head.pos(1:3,k));
    F(:,k)=F(:,k)+Fi;
 
 end
+
+% Filter
+dt=motion.time(2)-motion.time(1);
+[B,A] = butter(2,5*2*dt);
+F_filtered=transpose(filtfilt(B,A,F'));
+
+%plot
+subplot(3,1,1)
+hold off
+plot(motion.time,F(1,:))
+hold on
+plot(motion.time,F_filtered(1,:))
+title("Fx")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Force (N)")
+subplot(3,1,2)
+hold off
+plot(motion.time,F(2,:))
+hold on
+plot(motion.time,F_filtered(2,:))
+title("Fy")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Force (N)")
+subplot(3,1,3)
+hold off
+plot(motion.time,F(3,:))
+hold on
+plot(motion.time,F_filtered(3,:))
+title("Fz")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Force (N)")
