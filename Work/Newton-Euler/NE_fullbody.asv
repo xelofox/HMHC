@@ -41,9 +41,9 @@ for k=1:nb_step
     Foot.pos.R(:,k)=CoM_pos_orientation(Foot,motion.J20(:,k));
     Foot.pos.L(:,k)=CoM_pos_orientation(Foot,motion.J19(:,k));
 end
-
 %Here we compute the discrete time derivative and the discrete double time 
 %derivative of the J vector using the time array for the increment
+
 [Head.velocity,Head.acceleration]=time_diff(Head.pos,motion.time);
 [U_Trunk.velocity,U_Trunk.acceleration]=time_diff(U_Trunk.pos,motion.time);
 [M_Trunk.velocity,M_Trunk.acceleration]=time_diff(M_Trunk.pos,motion.time);
@@ -54,22 +54,18 @@ end
 [Forearm.velocity.L,Forearm.acceleration.L]=time_diff(Forearm.pos.L,motion.time);
 [Hand.velocity.R,Hand.acceleration.R]=time_diff(Hand.pos.R,motion.time);
 [Hand.velocity.L,Hand.acceleration.L]=time_diff(Hand.pos.L,motion.time);
-[Thigh.velocity.R,Thigh.acceleration.R]=time_diff(Thigh.pos.R,motion.time);
-[Thigh.velocity.L,Thigh.acceleration.L]=time_diff(Thigh.pos.L,motion.time);
-[Shank.velocity.R,Shank.acceleration.R]=time_diff(Shank.pos.R,motion.time);
-[Shank.velocity.L,Shank.acceleration.L]=time_diff(Shank.pos.L,motion.time);
-[Foot.velocity.R,Foot.acceleration.R]=time_diff(Foot.pos.R,motion.time);
-[Foot.velocity.L,Foot.acceleration.L]=time_diff(Foot.pos.L,motion.time);
+[Hand.velocity.R,Hand.acceleration.R]=time_diff(Hand.pos.R,motion.time);
+[Hand.velocity.L,Hand.acceleration.L]=time_diff(Hand.pos.L,motion.time);
 
 
 F=zeros(3,nb_step);
-T=F;
+M=F;
 
 %Here we compute the reactions of each body part using the Newton-Euler
 %equations
 for k=1:nb_step
    %head
-   [Fi,Ti,Ec,Ep]=NE_one_body(0,0,Head,Head.pos(:,k),Head.velocity(:,k),Head.acceleration(:,k),Head.pos(1:3,k));
+   [Ti,Fi,Mi,Ec,Ep]=NE_one_body(0,0,Head,J4(:,k),J4d(:,k),J4dd(:,k),J4(1:3,k),J4(1:3,k));
    F(:,k)=F(:,k)+Fi;
 
 end

@@ -44,17 +44,17 @@ Ii=R'*I0*R;
 vm=qd(1:3);
 Omega=qd(4:6);
 vm_d=qdd(1:3);
-Omega_d=qdd(4:6);
+Omega_d=qd(4:6);
 
 %Formulas of the Newten Euler equations seen in the AMORO lessons expressed
 %in the world frame
-Fi= Fj + m*g + m*vm_d + m*cross(Omega_d,S0) + m*mrot(Omega)*cross(Omega,S0);
-Ti= Tj + cross(S0,m*g) + Ii*Omega_d + m*cross(S0,vm_d) + mrot(Omega)*( Ii * Omega );
+Fi= Fj + m*g + m*qdd(1:3) + m*cross(qdd(4:6),S0) + m*mrot(Omega)*cross(Omega,S0);
+Ti= Tj + cross(S0,m*g) + Ii*qdd(4:6) + m*cross(S0,qdd(1:3)) + mrot(Omega)*( Ii * qd(4:6) );
 
 
 %Energy of the CoM of the body
 Ec=0.5*m*vm'*vm+0.5*Omega'*Ii*Omega;
-Ep=-m*g'*q(1:3);
+Ep=-m*g'*CoM;
 
 
 end

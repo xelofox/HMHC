@@ -36,27 +36,27 @@ if segment.name=="L_Trunk"
 end
 
 if segment.name=="Upperarm"
-    pos_CoM=pos_marker+rot_y(pi/2)*Rz*(-Upperarm.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Upperarm.L*z+segment.CoM);
 end
 
 if segment.name=="Forearm"
-    pos_CoM=pos_marker+rot_y(pi/2)*Rz*(-Forearm.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Forearm.L*z+segment.CoM);
 end
 
 if segment.name=="Hand"
-    pos_CoM=pos_marker+rot_y(pi/2)*Rz*(-Hand.c*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Hand.c*z+segment.CoM);
 end
 
 if segment.name=="Thigh"
-    pos_CoM=pos_marker+rot_x(pi)*Rz*(-Thigh.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_x(pi)*(-Thigh.L*z+segment.CoM);
 end
 
 if segment.name=="Shank"
-    pos_CoM=pos_marker+rot_x(pi)*Rz*(-Shank.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_x(pi)*(-Shank.L*z+segment.CoM);
 end
 
 if segment.name=="Foot"
-    pos_CoM=pos_marker+rot_x(pi/2)*Rz*(-Foot.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_x(pi/2)*(-Foot.L*z+segment.CoM);
 end
 
 t=[pos_CoM; theta];
