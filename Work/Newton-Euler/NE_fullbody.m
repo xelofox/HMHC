@@ -14,6 +14,7 @@ Hanavan;
 %It contains "qi" vectors which are unused, "Ji" vectors, and the "time" 
 %array
 load(Motion+"_q.mat")
+motion.time=motion.time-motion.time(1); % set init to zero
 
 % Each Ji is a combination of vectors of dimension 6. We have as many Ji
 % vectors as values inside the time array.
@@ -71,6 +72,7 @@ for k=1:nb_step
    %head
    [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Head,Head.pos(:,k),Head.velocity(:,k),Head.acceleration(:,k),Head.pos(1:3,k));
    F(:,k)=F(:,k)+Fi;
+   T(:,k)=T(:,k)+Ti+cross(Head.pos(1:3,k),Fi);
 
 end
 
@@ -78,9 +80,10 @@ end
 dt=motion.time(2)-motion.time(1);
 [B,A] = butter(2,5*2*dt);
 F_filtered=transpose(filtfilt(B,A,F'));
+T_filtered=transpose(filtfilt(B,A,T'));
 
 %plot
-subplot(3,1,1)
+subplot(3,2,1)
 hold off
 plot(motion.time,F(1,:))
 hold on
@@ -89,7 +92,8 @@ title("Fx")
 legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
-subplot(3,1,2)
+
+subplot(3,2,3)
 hold off
 plot(motion.time,F(2,:))
 hold on
@@ -98,7 +102,8 @@ title("Fy")
 legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
-subplot(3,1,3)
+
+subplot(3,2,5)
 hold off
 plot(motion.time,F(3,:))
 hold on
@@ -107,3 +112,33 @@ title("Fz")
 legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
+
+subplot(3,2,2)
+hold off
+plot(motion.time,T(1,:))
+hold on
+plot(motion.time,T_filtered(1,:))
+title("Tx")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Torque (N.m)")
+
+subplot(3,2,4)
+hold off
+plot(motion.time,T(2,:))
+hold on
+plot(motion.time,T_filtered(2,:))
+title("Ty")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Torque (N.m)")
+
+subplot(3,2,6)
+hold off
+plot(motion.time,T(3,:))
+hold on
+plot(motion.time,T_filtered(3,:))
+title("Tz")
+legend("raw","filtered")
+xlabel("Time (s)")
+ylabel("Torque (N.m)")
