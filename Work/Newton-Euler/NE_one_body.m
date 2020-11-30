@@ -16,7 +16,7 @@
 
 function [Fi,Ti,Ec,Ep]=NE_one_body(Fj,Tj,segment,q,qd,qdd,Joint)
 x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];
-g=-9.81*y;
+g=-9.81*z;
 
 %The three main rotations of the body among the local x, y and z angles
 %relying on the 3 last values imported from each Ji vector
