@@ -1,5 +1,5 @@
 %Made by Nicolas Testard if there is any question
-
+global Head U_Trunk M_Trunk L_Trunk Upperarm Forearm Hand Thigh Shank Foot
 %% Hanavan parameters
 % list of the 41 mean values according to the Hanavan Model (pg 138)
 P=[ 0.1940;
@@ -56,6 +56,7 @@ Hand.group="SE";
 Hand.a=P(14)/(2*pi);
 Hand.b=Hand.a;
 Hand.c=P(2)/2;
+Hand.name="Hand";
 
 %Forearm
 Forearm.shape="TCC";
@@ -65,6 +66,7 @@ Forearm.b0=Forearm.a0;
 Forearm.a1=P(15)/(2*pi);
 Forearm.b1=Forearm.a1;
 Forearm.L=P(3);
+Forearm.name="Forearm";
 
 %Upperarm
 Upperarm.shape="TCC";
@@ -74,6 +76,7 @@ Upperarm.b0=Upperarm.a0;
 Upperarm.a1=P(17)/(2*pi);
 Upperarm.b1=Upperarm.a1;
 Upperarm.L=P(5);
+Upperarm.name="Upperarm";
 
 %Foot
 Foot.shape="ES Circ. Base";
@@ -83,6 +86,7 @@ Foot.b0=Foot.a0;
 Foot.a1=(P(33)+P(34))/4;
 Foot.b1=(P(20)+P(21))/(2*pi);
 Foot.L=P(6);
+Foot.name="Foot";
 
 %Shank
 Shank.shape="TCC";
@@ -92,6 +96,7 @@ Shank.b0=Shank.a0;
 Shank.a1=P(22)/(2*pi);
 Shank.b1=Shank.a1;
 Shank.L=P(7);
+Shank.name="Shank";
 
 %Thigh
 Thigh.shape="ES Circ. Top";
@@ -101,6 +106,7 @@ Thigh.a0=P(25)/pi-Thigh.b0;
 Thigh.a1=P(24)/(2*pi);
 Thigh.b1=Thigh.a1;
 Thigh.L=P(8);
+Thigh.name="Thigh";
 
 %Head
 Head.shape="ER";
@@ -108,6 +114,7 @@ Head.group="SE";
 Head.a=P(26)/(2*pi);
 Head.b=Head.a;
 Head.c=P(9)/2;
+Head.name="Head";
 
 %U_Trunk
 U_Trunk.shape="EC";
@@ -117,6 +124,7 @@ U_Trunk.b0=(P(27)+P(28))/(2*pi)-U_Trunk.a0;
 U_Trunk.a1=U_Trunk.a0;
 U_Trunk.b1=U_Trunk.b0;
 U_Trunk.L=P(11);
+U_Trunk.name="U_Trunk";
 
 %M_Trunk
 M_Trunk.shape="ES";
@@ -126,6 +134,7 @@ M_Trunk.b0=P(28)/pi-M_Trunk.a0;
 M_Trunk.a1=P(38)/2;
 M_Trunk.b1=P(29)/pi-M_Trunk.a0;
 M_Trunk.L=P(12);
+M_Trunk.name="M_Trunk";
 
 %L_Trunk
 L_Trunk.shape="EC";
@@ -135,6 +144,7 @@ L_Trunk.b0=(P(29)+P(30))/(2*pi)-L_Trunk.a0;
 L_Trunk.a1=L_Trunk.a0;
 L_Trunk.b1=L_Trunk.b0;
 L_Trunk.L=P(13);
+L_Trunk.name="L_Trunk";
 
 %% Volume
 %Here this functions returns us the Volume of each body part. Each body
