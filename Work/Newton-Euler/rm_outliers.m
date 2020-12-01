@@ -1,3 +1,5 @@
+%Made by Nicolas Testard if there is any question
+
 function [qd,qdd]=rm_outliers(qd,qdd)
 L=length(qd);
 k=4;
