@@ -7,7 +7,7 @@ clear; close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="quickJump";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
@@ -240,66 +240,64 @@ legend("ground","filtered")
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
-
-%% Comparison with the data
 figure
 subplot(3,2,1)
 hold off
-plot(ground.time,ground.Fx)
+plot(motion.time,F(1,:))
 hold on
 plot(motion.time,F_filtered(1,:))
 title("Fx")
-legend("ground","computed")
+legend("ground","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
 
 subplot(3,2,3)
 hold off
-plot(ground.time,ground.Fy)
+plot(motion.time,F(2,:))
 hold on
 plot(motion.time,F_filtered(2,:))
 title("Fy")
-legend("ground","computed")
+legend("ground","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
 
 subplot(3,2,5)
 hold off
-plot(ground.time,ground.Fz)
+plot(motion.time,F(3,:))
 hold on
 plot(motion.time,F_filtered(3,:))
 title("Fz")
-legend("ground","computed")
+legend("ground","filtered")
 xlabel("Time (s)")
 ylabel("Force (N)")
 
 subplot(3,2,2)
 hold off
-plot(ground.time,ground.Mx)
+plot(motion.time,T(1,:))
 hold on
 plot(motion.time,T_filtered(1,:))
 title("Tx")
-legend("ground","computed")
+legend("ground","filtered")
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
 subplot(3,2,4)
 hold off
-plot(ground.time,ground.My)
+plot(motion.time,T(2,:))
 hold on
 plot(motion.time,T_filtered(2,:))
 title("Ty")
-legend("ground","computed")
+legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
 subplot(3,2,6)
 hold off
-plot(ground.time,ground.Mz)
+plot(motion.time,T(3,:))
 hold on
 plot(motion.time,T_filtered(3,:))
 title("Tz")
-legend("ground","computed")
+legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
