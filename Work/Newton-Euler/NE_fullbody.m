@@ -1,5 +1,5 @@
 %Made by Nicolas Testard if there is any question
-
+clear; close all;
 %Only forces for now
 
 %This seems to be the MAIN program
@@ -63,13 +63,14 @@ end
 [Foot.velocity.L,Foot.acceleration.L]=time_diff(Foot.pos.L,motion.time);
 
 
+
 F=zeros(3,nb_step);
 T=F;
 
 %Here we compute the reactions of each body part using the Newton-Euler
 %equations
 for k=1:nb_step
-   %head
+   %Head
    [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Head,Head.pos(:,k),Head.velocity(:,k),Head.acceleration(:,k),Head.pos(1:3,k));
    F(:,k)=F(:,k)+Fi;
    T(:,k)=T(:,k)+Ti+cross(Head.pos(1:3,k),Fi);
@@ -142,3 +143,13 @@ title("Tz")
 legend("raw","filtered")
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
+
+dt=motion.time(2)-motion.time(1);
+[B,A] = butter(2,1*5*dt);
+vel=transpose(filtfilt(B,A,Head.velocity(4,:)));
+[vel,acc]=rm_outlier(Upperarm.velocity.R(5,:),Upperarm.acceleration.R(5,:));
+%vel=rmoutliers(Forearm.velocity.R(4,:))
+figure 
+plot(Upperarm.velocity.R(5,:))
+hold on
+plot(vel)
