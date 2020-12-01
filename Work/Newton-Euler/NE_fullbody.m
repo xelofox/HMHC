@@ -147,9 +147,27 @@ ylabel("Torque (N.m)")
 dt=motion.time(2)-motion.time(1);
 [B,A] = butter(2,1*5*dt);
 vel=transpose(filtfilt(B,A,Head.velocity(4,:)));
-[vel,acc]=rm_outlier(Upperarm.velocity.R(5,:),Upperarm.acceleration.R(5,:));
+[vel,acc]=rm_outliers(Head.velocity(4,:),Head.acceleration(4,:));
+%[vel,acc]=rm_outliers(Upperarm.velocity.R(5,:),Upperarm.acceleration.R(5,:));
 %vel=rmoutliers(Forearm.velocity.R(4,:))
 figure 
-plot(Upperarm.velocity.R(5,:))
+
+subplot(2,1,1)
+plot(Head.velocity(4,:))
 hold on
 plot(vel)
+subplot(2,1,2)
+plot(Head.acceleration(4,:))
+hold on
+plot(acc)
+
+% subplot(2,1,1)
+% hold off
+% plot(Upperarm.velocity.R(5,:))
+% hold on
+% plot(vel)
+% subplot(2,1,2)
+% hold off
+% plot(Upperarm.acceleration.R(5,:))
+% hold on
+% plot(acc)
