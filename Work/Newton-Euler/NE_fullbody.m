@@ -7,14 +7,15 @@ clear; close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="quickJump";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
 %It contains "qi" vectors which are unused, "Ji" vectors, and the "time" 
 %array
 load(Motion+"_q.mat")
-motion.time=motion.time-motion.time(1); % set init to zero
+%motion.time=motion.time-motion.time(1)+1.25; % quickJump
+motion.time=motion.time-motion.time(1)+2; % slowArm
 
 % Data from ground
 load(Motion+"_ground.mat")
