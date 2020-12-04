@@ -38,7 +38,7 @@ I0(2,2)=I0(2,2)+m*(Si(1)^2+Si(3)^2);
 I0(3,3)=I0(3,3)+m*(Si(1)^2+Si(2)^2);
 
 %Expressed inertia matrix in the world frame
-Ii=R'*I0*R;
+Ii=R*I0*R';
 
 %Velocity and acceleration of the CoM of the body
 vm=qd(1:3);

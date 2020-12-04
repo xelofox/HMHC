@@ -7,15 +7,14 @@ clear; close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="slowArm";
+Motion="quickJump";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
 %It contains "qi" vectors which are unused, "Ji" vectors, and the "time" 
 %array
 load(Motion+"_q.mat")
-%motion.time=motion.time-motion.time(1)+1.25; % quickJump
-motion.time=motion.time-motion.time(1)+2; % slowArm
+motion.time=adapt_time(Motion,motion.time)
 
 % Data from ground
 load(Motion+"_ground.mat")
@@ -67,24 +66,24 @@ end
 [Foot.velocity.R,Foot.acceleration.R]=time_diff(Foot.pos.R,motion.time);
 [Foot.velocity.L,Foot.acceleration.L]=time_diff(Foot.pos.L,motion.time);
 
-for k=1:6
-    [Head.velocity(k,:),Head.acceleration(k,:)]=rm_outliers(Head.velocity(k,:),Head.acceleration(k,:));
-    [U_Trunk.velocity(k,:),U_Trunk.acceleration(k,:)]=rm_outliers(U_Trunk.velocity(k,:),U_Trunk.acceleration(k,:));
-    [M_Trunk.velocity(k,:),M_Trunk.acceleration(k,:)]=rm_outliers(M_Trunk.velocity(k,:),M_Trunk.acceleration(k,:));
-    [L_Trunk.velocity(k,:),L_Trunk.acceleration(k,:)]=rm_outliers(L_Trunk.velocity(k,:),L_Trunk.acceleration(k,:));
-    [Upperarm.velocity.R(k,:),Upperarm.acceleration.R(k,:)]=rm_outliers(Upperarm.velocity.R(k,:),Upperarm.acceleration.R(k,:));
-    [Upperarm.velocity.L(k,:),Upperarm.acceleration.L(k,:)]=rm_outliers(Upperarm.velocity.L(k,:),Upperarm.acceleration.L(k,:));
-    [Forearm.velocity.R(k,:),Forearm.acceleration.R(k,:)]=rm_outliers(Forearm.velocity.R(k,:),Forearm.acceleration.R(k,:));
-    [Forearm.velocity.L(k,:),Forearm.acceleration.L(k,:)]=rm_outliers(Forearm.velocity.L(k,:),Forearm.acceleration.L(k,:));
-    [Hand.velocity.R(k,:),Hand.acceleration.R(k,:)]=rm_outliers(Hand.velocity.R(k,:),Hand.acceleration.R(k,:));
-    [Hand.velocity.L(k,:),Hand.acceleration.L(k,:)]=rm_outliers(Hand.velocity.L(k,:),Hand.acceleration.L(k,:));
-    [Thigh.velocity.R(k,:),Thigh.acceleration.R(k,:)]=rm_outliers(Thigh.velocity.R(k,:),Thigh.acceleration.R(k,:));
-    [Thigh.velocity.L(k,:),Thigh.acceleration.L(k,:)]=rm_outliers(Thigh.velocity.L(k,:),Thigh.acceleration.L(k,:));
-    [Shank.velocity.R(k,:),Shank.acceleration.R(k,:)]=rm_outliers(Shank.velocity.R(k,:),Shank.acceleration.R(k,:));
-    [Shank.velocity.L(k,:),Shank.acceleration.L(k,:)]=rm_outliers(Shank.velocity.L(k,:),Shank.acceleration.L(k,:));
-    [Foot.velocity.R(k,:),Foot.acceleration.R(k,:)]=rm_outliers(Foot.velocity.R(k,:),Foot.acceleration.R(k,:));
-    [Foot.velocity.L(k,:),Foot.acceleration.L(k,:)]=rm_outliers(Foot.velocity.L(k,:),Foot.acceleration.L(k,:));
-end
+% for k=1:6
+%     [Head.velocity(k,:),Head.acceleration(k,:)]=rm_outliers(Head.velocity(k,:),Head.acceleration(k,:));
+%     [U_Trunk.velocity(k,:),U_Trunk.acceleration(k,:)]=rm_outliers(U_Trunk.velocity(k,:),U_Trunk.acceleration(k,:));
+%     [M_Trunk.velocity(k,:),M_Trunk.acceleration(k,:)]=rm_outliers(M_Trunk.velocity(k,:),M_Trunk.acceleration(k,:));
+%     [L_Trunk.velocity(k,:),L_Trunk.acceleration(k,:)]=rm_outliers(L_Trunk.velocity(k,:),L_Trunk.acceleration(k,:));
+%     [Upperarm.velocity.R(k,:),Upperarm.acceleration.R(k,:)]=rm_outliers(Upperarm.velocity.R(k,:),Upperarm.acceleration.R(k,:));
+%     [Upperarm.velocity.L(k,:),Upperarm.acceleration.L(k,:)]=rm_outliers(Upperarm.velocity.L(k,:),Upperarm.acceleration.L(k,:));
+%     [Forearm.velocity.R(k,:),Forearm.acceleration.R(k,:)]=rm_outliers(Forearm.velocity.R(k,:),Forearm.acceleration.R(k,:));
+%     [Forearm.velocity.L(k,:),Forearm.acceleration.L(k,:)]=rm_outliers(Forearm.velocity.L(k,:),Forearm.acceleration.L(k,:));
+%     [Hand.velocity.R(k,:),Hand.acceleration.R(k,:)]=rm_outliers(Hand.velocity.R(k,:),Hand.acceleration.R(k,:));
+%     [Hand.velocity.L(k,:),Hand.acceleration.L(k,:)]=rm_outliers(Hand.velocity.L(k,:),Hand.acceleration.L(k,:));
+%     [Thigh.velocity.R(k,:),Thigh.acceleration.R(k,:)]=rm_outliers(Thigh.velocity.R(k,:),Thigh.acceleration.R(k,:));
+%     [Thigh.velocity.L(k,:),Thigh.acceleration.L(k,:)]=rm_outliers(Thigh.velocity.L(k,:),Thigh.acceleration.L(k,:));
+%     [Shank.velocity.R(k,:),Shank.acceleration.R(k,:)]=rm_outliers(Shank.velocity.R(k,:),Shank.acceleration.R(k,:));
+%     [Shank.velocity.L(k,:),Shank.acceleration.L(k,:)]=rm_outliers(Shank.velocity.L(k,:),Shank.acceleration.L(k,:));
+%     [Foot.velocity.R(k,:),Foot.acceleration.R(k,:)]=rm_outliers(Foot.velocity.R(k,:),Foot.acceleration.R(k,:));
+%     [Foot.velocity.L(k,:),Foot.acceleration.L(k,:)]=rm_outliers(Foot.velocity.L(k,:),Foot.acceleration.L(k,:));
+% end
 
 F=zeros(3,nb_step);
 T=F;
@@ -174,6 +173,8 @@ for k=1:nb_step
 end
 
 
+
+
 % Filter
 dt=motion.time(2)-motion.time(1);
 [B,A] = butter(2,5*2*dt);
@@ -181,128 +182,45 @@ F_filtered=transpose(filtfilt(B,A,F'));
 T_filtered=transpose(filtfilt(B,A,T'));
 
 %plot
-subplot(3,2,1)
-hold off
-plot(motion.time,F(1,:))
-hold on
-plot(motion.time,F_filtered(1,:))
-title("Fx")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Force (N)")
 
-subplot(3,2,3)
-hold off
-plot(motion.time,F(2,:))
-hold on
-plot(motion.time,F_filtered(2,:))
-title("Fy")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Force (N)")
-
-subplot(3,2,5)
-hold off
-plot(motion.time,F(3,:))
-hold on
-plot(motion.time,F_filtered(3,:))
-title("Fz")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Force (N)")
-
-subplot(3,2,2)
-hold off
-plot(motion.time,T(1,:))
-hold on
-plot(motion.time,T_filtered(1,:))
-title("Tx")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
-
-subplot(3,2,4)
-hold off
-plot(motion.time,T(2,:))
-hold on
-plot(motion.time,T_filtered(2,:))
-title("Ty")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
-
-subplot(3,2,6)
-hold off
-plot(motion.time,T(3,:))
-hold on
-plot(motion.time,T_filtered(3,:))
-title("Tz")
-legend("ground","filtered")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
+plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
 
 
 %% Comparison with the data
 figure
-subplot(3,2,1)
-hold off
-plot(ground.time,ground.Fx)
-hold on
-plot(motion.time,F_filtered(1,:))
-title("Fx")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Force (N)")
 
-subplot(3,2,3)
-hold off
-plot(ground.time,ground.Fy)
-hold on
-plot(motion.time,F_filtered(2,:))
-title("Fy")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Force (N)")
+W1=[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'];
+W2=[F_filtered;T_filtered];
+plot_comparison(ground.time,W1,motion.time,W2,["ground";"computed"])
 
-subplot(3,2,5)
-hold off
-plot(ground.time,ground.Fz)
-hold on
-plot(motion.time,F_filtered(3,:))
-title("Fz")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Force (N)")
+%% CoP
 
-subplot(3,2,2)
-hold off
-plot(ground.time,ground.Mx)
-hold on
-plot(motion.time,T_filtered(1,:))
-title("Tx")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
+CoP=zeros(3,nb_step);
+T_CoP=CoP;
+for k=1:nb_step
+    CoP(1,k)=-T(2,k)/F(3,k);
+    CoP(2,k)=T(1,k)/F(3,k);
+    T_CoP(:,k)=T(:,k)-cross(CoP(:,k),F(:,k));
+end
 
-subplot(3,2,4)
-hold off
-plot(ground.time,ground.My)
-hold on
-plot(motion.time,T_filtered(2,:))
-title("Ty")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
+for k=1:length(ground.CoPx)
+    ground.T_CoP(:,k)=[ground.Mx(k); ground.My(k);ground.Mz(k)]+...
+        -cross([ground.CoPx(k); ground.CoPy(k);0],[ground.Fx(k); ground.Fy(k);ground.Fz(k)]);
+end
 
-subplot(3,2,6)
-hold off
-plot(ground.time,ground.Mz)
-hold on
-plot(motion.time,T_filtered(3,:))
-title("Tz")
-legend("ground","computed")
-xlabel("Time (s)")
-ylabel("Torque (N.m)")
+figure
+plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
+    motion.time,[F_filtered;T_CoP],["ground";"computed CoP"])
+
+
+for k=1:nb_step
+    T2(:,k)=T(:,k)-cross(CoP(:,1),F_filtered(:,k));
+    T2(:,k)=T(:,k)+cross([ground.CoPx(1); ground.CoPy(1);0],F_filtered(:,k));
+end
+
+figure
+plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'],...
+    motion.time,[F_filtered;T2],["ground";"computed"])
 
 
 % [vel,acc]=rm_outliers(Head.velocity(4,:),Head.acceleration(4,:));
