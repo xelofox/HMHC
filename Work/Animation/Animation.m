@@ -1,6 +1,6 @@
 %Made by Nicolas Testard if there is any question
 
-Motion="quickJump";
+Motion="medJump";
 Hanavan;
 load(Motion+"_q.mat")
 
@@ -30,7 +30,7 @@ dt=motion.time(2)-motion.time(1);
 
 %% Working?
 % midJump => frame 179
-for k=10
+for k=179
     hold off
    %head
    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;

@@ -39,10 +39,10 @@ I0=I0+m*matrix_huygens(Si);
 Ii=R*I0*R';
 
 %Velocity and acceleration of the CoM of the body
-vm=qd(1:3);
 Omega=qd(4:6);
-vm_d=qdd(1:3);
+vm=qd(1:3)+ cross(S0,Omega);
 Omega_d=qdd(4:6);
+vm_d=qdd(1:3)+cross(S0,Omega_d)+mrot(Omega)*cross(S0,Omega);
 
 %Formulas of the Newten Euler equations seen in the AMORO lessons expressed
 %in the world frame
