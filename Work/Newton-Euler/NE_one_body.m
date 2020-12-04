@@ -28,14 +28,12 @@ R=rot_u(u,theta_norm);
 %gravity
 S0=(q(1:3)-Joint);
 %Si is the same offset S0 in the body frame
-Si=R*S0;
+Si=R'*S0;
 
 %Build the inertia matrix (Huygens theorem)
 m=segment.m;
 I0=segment.inertia;
-I0(1,1)=I0(1,1)+m*(Si(2)^2+Si(3)^2);
-I0(2,2)=I0(2,2)+m*(Si(1)^2+Si(3)^2);
-I0(3,3)=I0(3,3)+m*(Si(1)^2+Si(2)^2);
+I0=I0+m*matrix_huygens(Si);
 
 %Expressed inertia matrix in the world frame
 Ii=R*I0*R';

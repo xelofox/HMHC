@@ -1,5 +1,5 @@
 clear
-Motion="mediumKick";
+Motion="maxJump";
 data=importdata(Motion+".csv");
 ground.time=data.data(:,2);
 ground.Fx=data.data(:,3);
