@@ -5,10 +5,10 @@ L=length(qd);
 k=4;
 
 while(k<L-4)
-    if ( abs(qd(k)-qd(k-1))>5*abs(qd(k-1)-qd(k-2)) )&&( abs(qd(k+2)-qd(k+1))>5*abs(qd(k+3)-qd(k+2)) )
+    %if ( abs(qd(k)-qd(k-1))>5*abs(qd(k-1)-qd(k-2)) )&&( abs(qd(k+2)-qd(k+1))>5*abs(qd(k+3)-qd(k+2)) )
     %if ( abs(qd(k)-qd(k-1))>abs(qd(k-1)-qd(k-2)) )&&( abs(qd(k+2)-qd(k+1))>abs(qd(k+3)-qd(k+2)) )
-        %if ( abs(qdd(k)-qdd(k+1))>(1.5)*abs(qdd(k)) )&&( abs(qdd(k)-qdd(k+1))>(1.5)*abs(qdd(k+1)) )
-        if ( abs(qdd(k)-qdd(k+1))>(1.2)*abs(qdd(k)) )&&( abs(qdd(k)-qdd(k+1))>(1.2)*abs(qdd(k+1)) )
+        if ( abs(qdd(k)-qdd(k+1))>(1.5)*abs(qdd(k)) )&&( abs(qdd(k)-qdd(k+1))>(1.5)*abs(qdd(k+1)) )
+        %if ( abs(qdd(k)-qdd(k+1))>(1.8)*abs(qdd(k)) )&&( abs(qdd(k)-qdd(k+1))>(1.8)*abs(qdd(k+1)) )
             
             qd(k)=qd(k-1)*2/3+qd(k+2)*1/3;
             qd(k+1)=qd(k-1)*1/3+qd(k+2)*2/3;
@@ -22,14 +22,14 @@ while(k<L-4)
             k=k+1;
         end
         
-    else
-        k=k+1;
-    end
+%     else
+%         k=k+1;
+%     end
 end
 
 
-qd=filloutliers(qd,'linear','movmedian',40);
-qdd=filloutliers(qdd,'linear','movmedian',40);
+% qd=filloutliers(qd,'linear','movmedian',40);
+% qdd=filloutliers(qdd,'linear','movmedian',40);
 
 
 

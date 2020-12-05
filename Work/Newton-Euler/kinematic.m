@@ -43,6 +43,33 @@ angle_step=150; %degree
 Euler_vel=zeros(3,nb_step);
 angle_step=150*pi/180; %degree
 
+% for i=1:3
+%     k=1;
+%     while k<=nb_step
+%         if (k==1)
+%             Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k)) / (t(k+1)-t(k));
+%             
+%         elseif (k==nb_step)
+%             Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
+%             
+%         elseif ( abs( Euler_angle(i,k)-Euler_angle(i,k-1) ) > angle_step ) % previous point far
+%             Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k)) / (t(k+1)-t(k));
+%             
+%         elseif ( abs( Euler_angle(i,k+1)-Euler_angle(i,k) ) > angle_step ) %next point far
+%             Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
+%             
+%              while (k+2<=nb_step)&&( abs( Euler_angle(i,k+2)-Euler_angle(i,k+1) )> angle_step) % the next points is following by a second gap
+%                 Euler_vel(i,k+1)=(Euler_angle(i,k+2)-Euler_angle(i,k)) / (t(k+2)-t(k));
+%                 k=k+1;
+%             end
+%             
+%         else
+%             Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k-1)) / (t(k+1)-t(k-1));         
+%         end
+%         k=k+1;
+%     end
+% end
+
 for i=1:3
     k=1;
     while k<=nb_step
@@ -53,10 +80,10 @@ for i=1:3
             Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
             
         elseif ( abs( Euler_angle(i,k)-Euler_angle(i,k-1) ) > angle_step ) % previous point far
-            Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k)) / (t(k+1)-t(k));
+            Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k-1) - 2*pi*sign(Euler_angle(i,k)-Euler_angle(i,k-1) ) ) / (t(k+1)-t(k-1));
             
         elseif ( abs( Euler_angle(i,k+1)-Euler_angle(i,k) ) > angle_step ) %next point far
-            Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
+            Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k-1) - 2*pi*sign( Euler_angle(i,k+1)-Euler_angle(i,k)) ) / (t(k+1)-t(k-1));
             
              while (k+2<=nb_step)&&( abs( Euler_angle(i,k+2)-Euler_angle(i,k+1) )> angle_step) % the next points is following by a second gap
                 Euler_vel(i,k+1)=(Euler_angle(i,k+2)-Euler_angle(i,k)) / (t(k+2)-t(k));
@@ -126,7 +153,7 @@ marker_pos=q(1:3,:)*1e-3;
 
 
 %% Computation of the CoM vel and acc
-[Omega,Omega_d]=rm_outliers(Omega,Omega_d);
+%[Omega,Omega_d]=rm_outliers(Omega,Omega_d);
 
 CoM_vel=zeros(3,nb_step); CoM_acc=CoM_vel;
 % CoM_pos=pos;
