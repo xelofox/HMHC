@@ -28,44 +28,63 @@ load(Motion+"_ground.mat")
 %and we convert the last 3 values of each J vector from º to rad
 nb_step=length(motion.time);
 
-% for k=1:nb_step
-%     Head.pos(:,k)=CoM_pos_orientation(Head,motion.J4(:,k));
-%     U_Trunk.pos(:,k)=CoM_pos_orientation(U_Trunk,motion.J3(:,k));
-%     M_Trunk.pos(:,k)=CoM_pos_orientation(M_Trunk,motion.J2(:,k));
-%     L_Trunk.pos(:,k)=CoM_pos_orientation(L_Trunk,motion.J2(:,k));
-%     Upperarm.pos.R(:,k)=CoM_pos_orientation(Upperarm,motion.J8(:,k));
-%     Upperarm.pos.L(:,k)=CoM_pos_orientation(Upperarm,motion.J7(:,k));
-%     Forearm.pos.R(:,k)=CoM_pos_orientation(Forearm,motion.J10(:,k));
-%     Forearm.pos.L(:,k)=CoM_pos_orientation(Forearm,motion.J9(:,k));
-%     Hand.pos.R(:,k)=CoM_pos_orientation(Hand,motion.J12(:,k));
-%     Hand.pos.L(:,k)=CoM_pos_orientation(Hand,motion.J11(:,k));
-%     Thigh.pos.R(:,k)=CoM_pos_orientation(Thigh,motion.J16(:,k));
-%     Thigh.pos.L(:,k)=CoM_pos_orientation(Thigh,motion.J15(:,k));
-%     Shank.pos.R(:,k)=CoM_pos_orientation(Shank,motion.J18(:,k));
-%     Shank.pos.L(:,k)=CoM_pos_orientation(Shank,motion.J17(:,k));
-%     Foot.pos.R(:,k)=CoM_pos_orientation(Foot,motion.J20(:,k));
-%     Foot.pos.L(:,k)=CoM_pos_orientation(Foot,motion.J19(:,k));
-% end
+for k=1:nb_step
+    Head.pos(:,k)=CoM_pos_orientation(Head,motion.J4(:,k));
+    U_Trunk.pos(:,k)=CoM_pos_orientation(U_Trunk,motion.J3(:,k));
+    M_Trunk.pos(:,k)=CoM_pos_orientation(M_Trunk,motion.J2(:,k));
+    L_Trunk.pos(:,k)=CoM_pos_orientation(L_Trunk,motion.J2(:,k));
+    Upperarm.pos.R(:,k)=CoM_pos_orientation(Upperarm,motion.J8(:,k));
+    Upperarm.pos.L(:,k)=CoM_pos_orientation(Upperarm,motion.J7(:,k));
+    Forearm.pos.R(:,k)=CoM_pos_orientation(Forearm,motion.J10(:,k));
+    Forearm.pos.L(:,k)=CoM_pos_orientation(Forearm,motion.J9(:,k));
+    Hand.pos.R(:,k)=CoM_pos_orientation(Hand,motion.J12(:,k));
+    Hand.pos.L(:,k)=CoM_pos_orientation(Hand,motion.J11(:,k));
+    Thigh.pos.R(:,k)=CoM_pos_orientation(Thigh,motion.J16(:,k));
+    Thigh.pos.L(:,k)=CoM_pos_orientation(Thigh,motion.J15(:,k));
+    Shank.pos.R(:,k)=CoM_pos_orientation(Shank,motion.J18(:,k));
+    Shank.pos.L(:,k)=CoM_pos_orientation(Shank,motion.J17(:,k));
+    Foot.pos.R(:,k)=CoM_pos_orientation(Foot,motion.J20(:,k));
+    Foot.pos.L(:,k)=CoM_pos_orientation(Foot,motion.J19(:,k));
+end
 
 %Here we compute the discrete time derivative and the discrete double time 
 %derivative of the J vector using the time array for the increment
-% [Head.vel,Head.acc]=time_diff(Head.pos,motion.time);
-% [U_Trunk.vel,U_Trunk.acc]=time_diff(U_Trunk.pos,motion.time);
-% [M_Trunk.vel,M_Trunk.acc]=time_diff(M_Trunk.pos,motion.time);
-% [L_Trunk.vel,L_Trunk.acc]=time_diff(L_Trunk.pos,motion.time);
-% [Upperarm.vel.R,Upperarm.acc.R]=time_diff(Upperarm.pos.R,motion.time);
-% [Upperarm.vel.L,Upperarm.acc.L]=time_diff(Upperarm.pos.L,motion.time);
-% [Forearm.vel.R,Forearm.acc.R]=time_diff(Forearm.pos.R,motion.time);
-% [Forearm.vel.L,Forearm.acc.L]=time_diff(Forearm.pos.L,motion.time);
-% [Hand.vel.R,Hand.acc.R]=time_diff(Hand.pos.R,motion.time);
-% [Hand.vel.L,Hand.acc.L]=time_diff(Hand.pos.L,motion.time);
-% [Thigh.vel.R,Thigh.acc.R]=time_diff(Thigh.pos.R,motion.time);
-% [Thigh.vel.L,Thigh.acc.L]=time_diff(Thigh.pos.L,motion.time);
-% [Shank.vel.R,Shank.acc.R]=time_diff(Shank.pos.R,motion.time);
-% [Shank.vel.L,Shank.acc.L]=time_diff(Shank.pos.L,motion.time);
-% [Foot.vel.R,Foot.acc.R]=time_diff(Foot.pos.R,motion.time);
-% [Foot.vel.L,Foot.acc.L]=time_diff(Foot.pos.L,motion.time);
+[Head.vel,Head.acc]=time_diff(Head.pos,motion.time);
+[U_Trunk.vel,U_Trunk.acc]=time_diff(U_Trunk.pos,motion.time);
+[M_Trunk.vel,M_Trunk.acc]=time_diff(M_Trunk.pos,motion.time);
+[L_Trunk.vel,L_Trunk.acc]=time_diff(L_Trunk.pos,motion.time);
+[Upperarm.vel.R,Upperarm.acc.R]=time_diff(Upperarm.pos.R,motion.time);
+[Upperarm.vel.L,Upperarm.acc.L]=time_diff(Upperarm.pos.L,motion.time);
+[Forearm.vel.R,Forearm.acc.R]=time_diff(Forearm.pos.R,motion.time);
+[Forearm.vel.L,Forearm.acc.L]=time_diff(Forearm.pos.L,motion.time);
+[Hand.vel.R,Hand.acc.R]=time_diff(Hand.pos.R,motion.time);
+[Hand.vel.L,Hand.acc.L]=time_diff(Hand.pos.L,motion.time);
+[Thigh.vel.R,Thigh.acc.R]=time_diff(Thigh.pos.R,motion.time);
+[Thigh.vel.L,Thigh.acc.L]=time_diff(Thigh.pos.L,motion.time);
+[Shank.vel.R,Shank.acc.R]=time_diff(Shank.pos.R,motion.time);
+[Shank.vel.L,Shank.acc.L]=time_diff(Shank.pos.L,motion.time);
+[Foot.vel.R,Foot.acc.R]=time_diff(Foot.pos.R,motion.time);
+[Foot.vel.L,Foot.acc.L]=time_diff(Foot.pos.L,motion.time);
 
+
+for k=1:6
+    [Head.vel(k,:),Head.acc(k,:)]=rm_outliers(Head.vel(k,:),Head.acc(k,:));
+    [U_Trunk.vel(k,:),U_Trunk.acc(k,:)]=rm_outliers(U_Trunk.vel(k,:),U_Trunk.acc(k,:));
+    [M_Trunk.vel(k,:),M_Trunk.acc(k,:)]=rm_outliers(M_Trunk.vel(k,:),M_Trunk.acc(k,:));
+    [L_Trunk.vel(k,:),L_Trunk.acc(k,:)]=rm_outliers(L_Trunk.vel(k,:),L_Trunk.acc(k,:));
+    [Upperarm.vel.R(k,:),Upperarm.acc.R(k,:)]=rm_outliers(Upperarm.vel.R(k,:),Upperarm.acc.R(k,:));
+    [Upperarm.vel.L(k,:),Upperarm.acc.L(k,:)]=rm_outliers(Upperarm.vel.L(k,:),Upperarm.acc.L(k,:));
+    [Forearm.vel.R(k,:),Forearm.acc.R(k,:)]=rm_outliers(Forearm.vel.R(k,:),Forearm.acc.R(k,:));
+    [Forearm.vel.L(k,:),Forearm.acc.L(k,:)]=rm_outliers(Forearm.vel.L(k,:),Forearm.acc.L(k,:));
+    [Hand.vel.R(k,:),Hand.acc.R(k,:)]=rm_outliers(Hand.vel.R(k,:),Hand.acc.R(k,:));
+    [Hand.vel.L(k,:),Hand.acc.L(k,:)]=rm_outliers(Hand.vel.L(k,:),Hand.acc.L(k,:));
+    [Thigh.vel.R(k,:),Thigh.acc.R(k,:)]=rm_outliers(Thigh.vel.R(k,:),Thigh.acc.R(k,:));
+    [Thigh.vel.L(k,:),Thigh.acc.L(k,:)]=rm_outliers(Thigh.vel.L(k,:),Thigh.acc.L(k,:));
+    [Shank.vel.R(k,:),Shank.acc.R(k,:)]=rm_outliers(Shank.vel.R(k,:),Shank.acc.R(k,:));
+    [Shank.vel.L(k,:),Shank.acc.L(k,:)]=rm_outliers(Shank.vel.L(k,:),Shank.acc.L(k,:));
+    [Foot.vel.R(k,:),Foot.acc.R(k,:)]=rm_outliers(Foot.vel.R(k,:),Foot.acc.R(k,:));
+    [Foot.vel.L(k,:),Foot.acc.L(k,:)]=rm_outliers(Foot.vel.L(k,:),Foot.acc.L(k,:));
+end
 
 
 
@@ -86,24 +105,6 @@ nb_step=length(motion.time);
 [Foot.pos.R,Foot.vel.R,Foot.acc.R]=kinematic(Foot,motion.time,motion.J20);
 [Foot.pos.L,Foot.vel.L,Foot.acc.L]=kinematic(Foot,motion.time,motion.J19);
 
-for k=1:6
-    [Head.vel(k,:),Head.acc(k,:)]=rm_outliers(Head.vel(k,:),Head.acc(k,:));
-    [U_Trunk.vel(k,:),U_Trunk.acc(k,:)]=rm_outliers(U_Trunk.vel(k,:),U_Trunk.acc(k,:));
-    [M_Trunk.vel(k,:),M_Trunk.acc(k,:)]=rm_outliers(M_Trunk.vel(k,:),M_Trunk.acc(k,:));
-    [L_Trunk.vel(k,:),L_Trunk.acc(k,:)]=rm_outliers(L_Trunk.vel(k,:),L_Trunk.acc(k,:));
-    [Upperarm.vel.R(k,:),Upperarm.acc.R(k,:)]=rm_outliers(Upperarm.vel.R(k,:),Upperarm.acc.R(k,:));
-    [Upperarm.vel.L(k,:),Upperarm.acc.L(k,:)]=rm_outliers(Upperarm.vel.L(k,:),Upperarm.acc.L(k,:));
-    [Forearm.vel.R(k,:),Forearm.acc.R(k,:)]=rm_outliers(Forearm.vel.R(k,:),Forearm.acc.R(k,:));
-    [Forearm.vel.L(k,:),Forearm.acc.L(k,:)]=rm_outliers(Forearm.vel.L(k,:),Forearm.acc.L(k,:));
-    [Hand.vel.R(k,:),Hand.acc.R(k,:)]=rm_outliers(Hand.vel.R(k,:),Hand.acc.R(k,:));
-    [Hand.vel.L(k,:),Hand.acc.L(k,:)]=rm_outliers(Hand.vel.L(k,:),Hand.acc.L(k,:));
-    [Thigh.vel.R(k,:),Thigh.acc.R(k,:)]=rm_outliers(Thigh.vel.R(k,:),Thigh.acc.R(k,:));
-    [Thigh.vel.L(k,:),Thigh.acc.L(k,:)]=rm_outliers(Thigh.vel.L(k,:),Thigh.acc.L(k,:));
-    [Shank.vel.R(k,:),Shank.acc.R(k,:)]=rm_outliers(Shank.vel.R(k,:),Shank.acc.R(k,:));
-    [Shank.vel.L(k,:),Shank.acc.L(k,:)]=rm_outliers(Shank.vel.L(k,:),Shank.acc.L(k,:));
-    [Foot.vel.R(k,:),Foot.acc.R(k,:)]=rm_outliers(Foot.vel.R(k,:),Foot.acc.R(k,:));
-    [Foot.vel.L(k,:),Foot.acc.L(k,:)]=rm_outliers(Foot.vel.L(k,:),Foot.acc.L(k,:));
-end
 
 F=zeros(3,nb_step);
 T=F;
@@ -215,13 +216,14 @@ T(isnan(T))=0;
 
 % Filter
 dt=motion.time(2)-motion.time(1);
-[B,A] = butter(2,5*2*dt);
+[B,A] = butter(2,20*2*dt);
 F_filtered=transpose(filtfilt(B,A,F'));
 T_filtered=transpose(filtfilt(B,A,T'));
-%F_filtered=F; T_filtered=T; 
+F_filtered=F; T_filtered=T; 
 %plot
 
 %plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
+%plot_comparison(motion.time,[F;T],motion.time,zeros(6,length(motion.time)),["raw";"filtered"])
 
 
 %% Comparison with the data
@@ -275,22 +277,25 @@ legend("Mechanic energy","Kinetic energy","Potential energy")
 xlabel("Time (s)")
 ylabel("Energy (J)")
 
-[vel,acc]=rm_outliers(Head.vel(4,:),Head.acc(4,:));
-% vel=filloutliers(Head.vel(4,:),'linear','movmedian',15);
-% acc=filloutliers(Head.acc(4,:),'linear','movmedian',15);
-% vel=hampel(Head.vel(4,:),2);
-% acc=hampel(Head.acc(4,:),2);
-%[vel,acc]=rm_outliers(Upperarm.vel.R(5,:),Upperarm.acc.R(5,:));
-figure 
 
-subplot(2,1,1)
-plot(Head.vel(4,:))
-hold on
-plot(vel)
-subplot(2,1,2)
-plot(Head.acc(4,:))
-hold on
-plot(acc)
+%% Tests
+
+% [vel,acc]=rm_outliers(Head.vel(4,:),Head.acc(4,:));
+% % vel=filloutliers(Head.vel(4,:),'linear','movmedian',15);
+% % acc=filloutliers(Head.acc(4,:),'linear','movmedian',15);
+% % vel=hampel(Head.vel(4,:),2);
+% % acc=hampel(Head.acc(4,:),2);
+% %[vel,acc]=rm_outliers(Upperarm.vel.R(5,:),Upperarm.acc.R(5,:));
+% figure 
+% 
+% subplot(2,1,1)
+% plot(Head.vel(4,:))
+% hold on
+% plot(vel)
+% subplot(2,1,2)
+% plot(Head.acc(4,:))
+% hold on
+% plot(acc)
 
 % close all
 % plot(Thigh.vel.R(6,:))

@@ -126,11 +126,15 @@ marker_pos=q(1:3,:)*1e-3;
 
 
 %% Computation of the CoM vel and acc
+[Omega,Omega_d]=rm_outliers(Omega,Omega_d);
+
 CoM_vel=zeros(3,nb_step); CoM_acc=CoM_vel;
+% CoM_pos=pos;
+% [CoM_vel,CoM_acc]=time_diff(CoM_pos,t);
+% [CoM_vel,CoM_acc]=rm_outliers(CoM_vel,CoM_acc);
 for k=1:nb_step
     CoM_pos=pos(1:3,k);
     S=CoM_pos-marker_pos(1:3,k);
-    
     CoM_vel(:,k)=marker_vel(:,k)+cross(Omega(:,k),S);
     CoM_acc(:,k)=marker_acc(:,k)+cross(Omega_d(:,k),S)+mrot(Omega(:,k))*cross(Omega(:,k),S);
 end
