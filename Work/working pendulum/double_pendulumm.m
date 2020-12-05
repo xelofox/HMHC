@@ -211,46 +211,23 @@ y1dd = - l1_*sin(q1_)*q1_dd - l1_*cos(q1_)*q1_d^2;
 x2dd = - l1_*cos(q1_)*q1_dd + l1_*sin(q1_)*q1_d^2 - l2_*cos(q1_ + q2_)*(q1_dd + q2_dd) + l2_*sin(q1_ + q2_)*(q1_d + q2_d)^2;
 y2dd = - l1_*sin(q1_)*q1_dd - l1_*cos(q1_)*q1_d^2 - l2_*sin(q1_ + q2_)*(q1_dd + q2_dd) - l2_*cos(q1_ + q2_)*(q1_d + q2_d)^2;
 
-% Forces body 2
-%F = m*a + m*g + m*w^2*l
-%F2_1 = m2_ * [(x2dd-x1dd) (y2dd-y1dd) 0]; %F=m*a
-%F2_2 = m2_ * [0 -g_ 0]; %F=m*g
-%F2_3 = m2_ * [(x2-x1)/l2_ (y2-y1)/l2_ 0] * abs(q1_d+q2_d)^2*l2_; %m*unitary_vector_position*w^2*l
-%F2_4 = m2_ * [(x2-x1)/l2_ (y2-y1)/l2_ 0] * abs(q1_d+q2_d)^2*l2_; %m*unitary_vector_position*w^2*l
-%F2_ = F2_1 + F2_2 + F2_3 + F2_4;
-
 %% Forces body 2
 %Outter Forces
 F2_g = m2_ * [0 -g_ 0]; %F=m*g
 %%Inner Forces
-F2_1 = m2_ * [(x2dd-x1dd) (y2dd-y1dd) 0]; %F=m*a (refered to the origin of the frame (where m1))
+F2_1 = m2_ * [(x1dd) (y1dd) 0]; %F=m*a (refered to the origin of the frame (where m1))
 F2_2 = cross([0 0 (q1_dd+q2_dd)],m2_*[(x2-x1) (y2-y1) 0]); %F=cross(w' , m*(X2-X1))
 F2_3 = cross([0 0 (q1_d+q2_d)],cross([0 0 (q1_d+q2_d)],m2_*[(x2-x1) (y2-y1) 0])); %cross(w ,cross(w , m*(X2-X1)))
 F2_ = F2_1 + F2_2 + F2_3 - F2_g;
-
-% Forces body 1
-%?(??F)?(outer forces)=?(m_j·v ?_j+? ?_j×ms_j+?_j×(?_j×ms_j))?(?_j  = inner forces (3×1))
-
-%F1_1 = m1_ * [(x1dd) (y1dd) 0]; %m·a
-%F1_2 = m1_ * [0 -g_ 0];
-%F1_3 = m1_ * [(x1)/l1_ (y1)/l1_ 0] * abs(q1_d)^2*l1_; %m*unitary_vector_position*w^2*l
-%F1_ = F1_1 + F1_2 + F1_3 + F2_;
 
 %% Forces body 1
 %Outter Forces
 F1_g = m1_ * [0 -g_ 0]; %F=m*g
 %%Inner Forces
-F1_1 = m1_ * [x1dd y1dd 0]; %F=m*a (refered to the origin of the frame (where m1))
+F1_1 = 0; %F=m*a (refered to the origin of the frame (where m1))
 F1_2 = cross([0 0 (q1_dd)],m1_*[(x1) (y1) 0]); %F=cross(w' , m*(X2-X1))
 F1_3 = cross([0 0 (q1_d)],cross([0 0 (q1_d)],m1_*[(x1) (y1) 0])); %cross(w ,cross(w , m*(X1)))
 F1_ = F1_1 + F1_2 + F1_3 - F1_g + F2_;
-
-
-% Torques (taking into account the inertia)
-%T2 = - cross(F2_,[(x2-x1) (y2-y1) 0]) + [0 0 m2_*l2_^2*(q2)];
-%T2_ = simplify(T2(3))
-%T1 = T2 + cross(F2_,[(x1) (y1) 0]) + cross(F1_,[(x1) (y1) 0]);
-%T1_ = simplify(T1(3))
 
 %% Torques of body 2
 %Outter Torques
@@ -270,7 +247,5 @@ T1_1 = (m1_*l1_^2) * [0 0 (q1_dd)]; %T = I*w'
 T1_2 = cross([(x1) (y1) 0],[x1dd y1dd 0]); %T = cross(ms,a)
 T1_ = T1_1 + T1_2 - T1_g + T1_F2 + T2_ ;
 T1_ = simplify(T1_(3));
-
-
 
 end
