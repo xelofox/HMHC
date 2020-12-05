@@ -7,7 +7,7 @@ clear; close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="quickJump";
+Motion="medJump";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
@@ -67,43 +67,42 @@ nb_step=length(motion.time);
 % [Foot.vel.L,Foot.acc.L]=time_diff(Foot.pos.L,motion.time);
 
 
+% for k=1:6
+%     [Head.vel(k,:),Head.acc(k,:)]=rm_outliers(Head.vel(k,:),Head.acc(k,:));
+%     [U_Trunk.vel(k,:),U_Trunk.acc(k,:)]=rm_outliers(U_Trunk.vel(k,:),U_Trunk.acc(k,:));
+%     [M_Trunk.vel(k,:),M_Trunk.acc(k,:)]=rm_outliers(M_Trunk.vel(k,:),M_Trunk.acc(k,:));
+%     [L_Trunk.vel(k,:),L_Trunk.acc(k,:)]=rm_outliers(L_Trunk.vel(k,:),L_Trunk.acc(k,:));
+%     [Upperarm.vel.R(k,:),Upperarm.acc.R(k,:)]=rm_outliers(Upperarm.vel.R(k,:),Upperarm.acc.R(k,:));
+%     [Upperarm.vel.L(k,:),Upperarm.acc.L(k,:)]=rm_outliers(Upperarm.vel.L(k,:),Upperarm.acc.L(k,:));
+%     [Forearm.vel.R(k,:),Forearm.acc.R(k,:)]=rm_outliers(Forearm.vel.R(k,:),Forearm.acc.R(k,:));
+%     [Forearm.vel.L(k,:),Forearm.acc.L(k,:)]=rm_outliers(Forearm.vel.L(k,:),Forearm.acc.L(k,:));
+%     [Hand.vel.R(k,:),Hand.acc.R(k,:)]=rm_outliers(Hand.vel.R(k,:),Hand.acc.R(k,:));
+%     [Hand.vel.L(k,:),Hand.acc.L(k,:)]=rm_outliers(Hand.vel.L(k,:),Hand.acc.L(k,:));
+%     [Thigh.vel.R(k,:),Thigh.acc.R(k,:)]=rm_outliers(Thigh.vel.R(k,:),Thigh.acc.R(k,:));
+%     [Thigh.vel.L(k,:),Thigh.acc.L(k,:)]=rm_outliers(Thigh.vel.L(k,:),Thigh.acc.L(k,:));
+%     [Shank.vel.R(k,:),Shank.acc.R(k,:)]=rm_outliers(Shank.vel.R(k,:),Shank.acc.R(k,:));
+%     [Shank.vel.L(k,:),Shank.acc.L(k,:)]=rm_outliers(Shank.vel.L(k,:),Shank.acc.L(k,:));
+%     [Foot.vel.R(k,:),Foot.acc.R(k,:)]=rm_outliers(Foot.vel.R(k,:),Foot.acc.R(k,:));
+%     [Foot.vel.L(k,:),Foot.acc.L(k,:)]=rm_outliers(Foot.vel.L(k,:),Foot.acc.L(k,:));
+% end
 
+[Head.pos,Head.vel,Head.acc]=time_diff(Head.pos,motion.time);
+[Head.pos,U_Trunk.vel,U_Trunk.acc]=time_diff(U_Trunk.pos,motion.time);
+[Head.pos,M_Trunk.vel,M_Trunk.acc]=time_diff(M_Trunk.pos,motion.time);
+[Head.pos,L_Trunk.vel,L_Trunk.acc]=time_diff(L_Trunk.pos,motion.time);
+[Head.pos,Upperarm.vel.R,Upperarm.acc.R]=time_diff(Upperarm.pos.R,motion.time);
+[Head.pos,Upperarm.vel.L,Upperarm.acc.L]=time_diff(Upperarm.pos.L,motion.time);
+[Head.pos,Forearm.vel.R,Forearm.acc.R]=time_diff(Forearm.pos.R,motion.time);
+[Head.pos,Forearm.vel.L,Forearm.acc.L]=time_diff(Forearm.pos.L,motion.time);
+[Head.pos,Hand.vel.R,Hand.acc.R]=time_diff(Hand.pos.R,motion.time);
+[Head.pos,Hand.vel.L,Hand.acc.L]=time_diff(Hand.pos.L,motion.time);
+[Thigh.vel.R,Thigh.acc.R]=time_diff(Thigh.pos.R,motion.time);
+[Thigh.vel.L,Thigh.acc.L]=time_diff(Thigh.pos.L,motion.time);
+[Shank.vel.R,Shank.acc.R]=time_diff(Shank.pos.R,motion.time);
+[Shank.vel.L,Shank.acc.L]=time_diff(Shank.pos.L,motion.time);
+[Foot.vel.R,Foot.acc.R]=time_diff(Foot.pos.R,motion.time);
+[Foot.vel.L,Foot.acc.L]=time_diff(Foot.pos.L,motion.time);
 
-[Head.pos,Head.vel,Head.acc]=kinematic(Head,motion.time,motion.J4);
-[U_Trunk.pos,U_Trunk.vel,U_Trunk.acc]=kinematic(U_Trunk,motion.time,motion.J3);
-[M_Trunk.pos,M_Trunk.vel,M_Trunk.acc]=kinematic(M_Trunk,motion.time,motion.J2);
-[L_Trunk.pos,L_Trunk.vel,L_Trunk.acc]=kinematic(L_Trunk,motion.time,motion.J2);
-[Upperarm.pos.R,Upperarm.vel.R,Upperarm.acc.R]=kinematic(Upperarm,motion.time,motion.J8);
-[Upperarm.pos.L,Upperarm.vel.L,Upperarm.acc.L]=kinematic(Upperarm,motion.time,motion.J7);
-[Forearm.pos.R,Forearm.vel.R,Forearm.acc.R]=kinematic(Forearm,motion.time,motion.J10);
-[Forearm.pos.L,Forearm.vel.L,Forearm.acc.L]=kinematic(Forearm,motion.time,motion.J9);
-[Hand.pos.R,Hand.vel.R,Hand.acc.R]=kinematic(Hand,motion.time,motion.J12);
-[Hand.pos.L,Hand.vel.L,Hand.acc.L]=kinematic(Hand,motion.time,motion.J11);
-[Thigh.pos.R,Thigh.vel.R,Thigh.acc.R]=kinematic(Thigh,motion.time,motion.J16);
-[Thigh.pos.L,Thigh.vel.L,Thigh.acc.L]=kinematic(Thigh,motion.time,motion.J15);
-[Shank.pos.R,Shank.vel.R,Shank.acc.R]=kinematic(Shank,motion.time,motion.J18);
-[Shank.pos.L,Shank.vel.L,Shank.acc.L]=kinematic(Shank,motion.time,motion.J17);
-[Foot.pos.R,Foot.vel.R,Foot.acc.R]=kinematic(Foot,motion.time,motion.J20);
-[Foot.pos.L,Foot.vel.L,Foot.acc.L]=kinematic(Foot,motion.time,motion.J19);
-
-for k=1:6
-    [Head.vel(k,:),Head.acc(k,:)]=rm_outliers(Head.vel(k,:),Head.acc(k,:));
-    [U_Trunk.vel(k,:),U_Trunk.acc(k,:)]=rm_outliers(U_Trunk.vel(k,:),U_Trunk.acc(k,:));
-    [M_Trunk.vel(k,:),M_Trunk.acc(k,:)]=rm_outliers(M_Trunk.vel(k,:),M_Trunk.acc(k,:));
-    [L_Trunk.vel(k,:),L_Trunk.acc(k,:)]=rm_outliers(L_Trunk.vel(k,:),L_Trunk.acc(k,:));
-    [Upperarm.vel.R(k,:),Upperarm.acc.R(k,:)]=rm_outliers(Upperarm.vel.R(k,:),Upperarm.acc.R(k,:));
-    [Upperarm.vel.L(k,:),Upperarm.acc.L(k,:)]=rm_outliers(Upperarm.vel.L(k,:),Upperarm.acc.L(k,:));
-    [Forearm.vel.R(k,:),Forearm.acc.R(k,:)]=rm_outliers(Forearm.vel.R(k,:),Forearm.acc.R(k,:));
-    [Forearm.vel.L(k,:),Forearm.acc.L(k,:)]=rm_outliers(Forearm.vel.L(k,:),Forearm.acc.L(k,:));
-    [Hand.vel.R(k,:),Hand.acc.R(k,:)]=rm_outliers(Hand.vel.R(k,:),Hand.acc.R(k,:));
-    [Hand.vel.L(k,:),Hand.acc.L(k,:)]=rm_outliers(Hand.vel.L(k,:),Hand.acc.L(k,:));
-    [Thigh.vel.R(k,:),Thigh.acc.R(k,:)]=rm_outliers(Thigh.vel.R(k,:),Thigh.acc.R(k,:));
-    [Thigh.vel.L(k,:),Thigh.acc.L(k,:)]=rm_outliers(Thigh.vel.L(k,:),Thigh.acc.L(k,:));
-    [Shank.vel.R(k,:),Shank.acc.R(k,:)]=rm_outliers(Shank.vel.R(k,:),Shank.acc.R(k,:));
-    [Shank.vel.L(k,:),Shank.acc.L(k,:)]=rm_outliers(Shank.vel.L(k,:),Shank.acc.L(k,:));
-    [Foot.vel.R(k,:),Foot.acc.R(k,:)]=rm_outliers(Foot.vel.R(k,:),Foot.acc.R(k,:));
-    [Foot.vel.L(k,:),Foot.acc.L(k,:)]=rm_outliers(Foot.vel.L(k,:),Foot.acc.L(k,:));
-end
 
 F=zeros(3,nb_step);
 T=F;
@@ -221,7 +220,7 @@ T_filtered=transpose(filtfilt(B,A,T'));
 %F_filtered=F; T_filtered=T; 
 %plot
 
-%plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
+plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
 
 
 %% Comparison with the data
@@ -291,11 +290,6 @@ subplot(2,1,2)
 plot(Head.acc(4,:))
 hold on
 plot(acc)
-
-% close all
-% plot(Thigh.vel.R(6,:))
-% hold on
-% plot(motion.J16(6,:))
 
 % subplot(2,1,1)
 % hold off
