@@ -20,8 +20,14 @@ g=-9.81*z;
 
 %The three main rotations of the body among the local x, y and z angles
 %relying on the 3 last values imported from each Ji vector
+%norm returns the absolute value of a vector (pitagoras of the 3
+%components)
 theta_norm=norm(q(4:6));
+%by doing this, we transform the rotations into a unitary vector and a
+%multiplying factor
 u=q(4:6)/theta_norm;
+%and we define the rotation as that unitary vector and that scalar using
+%this function:
 R=rot_u(u,theta_norm);
 
 %S0 is the offset distance between our local frame, and its center of
