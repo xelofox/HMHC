@@ -4,7 +4,7 @@
 %third: marker position and orientation
 %fourth: unknown
 clear
-Motion="quickJump";
+Motion="mediumArm";
 fclose("all");
 file=fopen(Motion+".drf");
 ind_time=1;
@@ -170,6 +170,6 @@ for k=1:length(Time)
     motion.J20(:,k)=transpose(values(20,:));
 end
 
-save(Motion+"_q",'motion');
+save("motion/"+Motion+"_q",'motion');
 
 clear char ind ind_segment ind_time pos1 pos2 time val vec file ind_vec Time k Motion values first second third fourth ind_joint 

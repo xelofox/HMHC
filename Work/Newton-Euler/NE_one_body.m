@@ -34,23 +34,21 @@ R=rot_u(u,theta_norm);
 %gravity
 S0=(q(1:3)-Joint);
 %Si is the same offset S0 in the body frame
-Si=R*S0;
+Si=R'*S0;
 
 %Build the inertia matrix (Huygens theorem)
 m=segment.m;
 I0=segment.inertia;
-I0(1,1)=I0(1,1)+m*(Si(2)^2+Si(3)^2);
-I0(2,2)=I0(2,2)+m*(Si(1)^2+Si(3)^2);
-I0(3,3)=I0(3,3)+m*(Si(1)^2+Si(2)^2);
+I0=I0+m*matrix_huygens(Si);
 
 %Expressed inertia matrix in the world frame
-Ii=R'*I0*R;
+Ii=R*I0*R';
 
 %Velocity and acceleration of the CoM of the body
-vm=qd(1:3);
 Omega=qd(4:6);
-vm_d=qdd(1:3);
+vm=qd(1:3)+ cross(S0,Omega);
 Omega_d=qdd(4:6);
+vm_d=qdd(1:3)+cross(S0,Omega_d)+mrot(Omega)*cross(S0,Omega);
 
 %Formulas of the Newten Euler equations seen in the AMORO lessons expressed
 %in the world frame

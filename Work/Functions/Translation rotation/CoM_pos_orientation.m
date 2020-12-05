@@ -24,11 +24,11 @@ if segment.name=="U_Trunk"
 end
 
 if segment.name=="M_Trunk"
-    pos_CoM=pos_marker+Rz*(-M_Trunk.L/2*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*(-M_Trunk.L*z+segment.CoM);
 end
 
 if segment.name=="L_Trunk"
-    pos_CoM=pos_marker+Rz*(-M_Trunk.L/2*z-L_Trunk.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*(-M_Trunk.L*z-L_Trunk.L*z+segment.CoM);
 end
 
 if segment.name=="Upperarm"
@@ -52,7 +52,8 @@ if segment.name=="Shank"
 end
 
 if segment.name=="Foot"
-    pos_CoM=pos_marker+Rz*rot_x(pi/2)*(-Foot.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_x(pi/2)*(-Foot.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*rot_x(-pi/2)*(-Foot.L/2*z+segment.CoM);
 end
 
 t=[pos_CoM; theta];
