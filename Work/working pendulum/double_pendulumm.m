@@ -223,7 +223,7 @@ y2dd = - l1_*sin(q1_)*q1_dd - l1_*cos(q1_)*q1_d^2 - l2_*sin(q1_ + q2_)*(q1_dd + 
 %Outter Forces
 F2_g = m2_ * [0 -g_ 0]; %F=m*g
 %%Inner Forces
-F2_1 = m2_ * [(x2dd-x1dd) (y2dd-y1dd) 0]; %F=m*a (refered to the origin of the frame (where m1))
+F2_1 = m2_ * [(x1dd) (y1dd) 0]; %F=m*a (refered to the origin of the frame (where m1))
 F2_2 = cross([0 0 (q1_dd+q2_dd)],m2_*[(x2-x1) (y2-y1) 0]); %F=cross(w' , m*(X2-X1))
 F2_3 = cross([0 0 (q1_d+q2_d)],cross([0 0 (q1_d+q2_d)],m2_*[(x2-x1) (y2-y1) 0])); %cross(w ,cross(w , m*(X2-X1)))
 F2_ = F2_1 + F2_2 + F2_3 - F2_g;
@@ -240,7 +240,7 @@ F2_ = F2_1 + F2_2 + F2_3 - F2_g;
 %Outter Forces
 F1_g = m1_ * [0 -g_ 0]; %F=m*g
 %%Inner Forces
-F1_1 = m1_ * [x1dd y1dd 0]; %F=m*a (refered to the origin of the frame (where m1))
+F1_1 = 0; %F=m*a (refered to the origin of the frame (where m1))
 F1_2 = cross([0 0 (q1_dd)],m1_*[(x1) (y1) 0]); %F=cross(w' , m*(X2-X1))
 F1_3 = cross([0 0 (q1_d)],cross([0 0 (q1_d)],m1_*[(x1) (y1) 0])); %cross(w ,cross(w , m*(X1)))
 F1_ = F1_1 + F1_2 + F1_3 - F1_g + F2_;
