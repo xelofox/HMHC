@@ -78,6 +78,23 @@ for i=1:3
             
         elseif (k==nb_step)
             Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
+        else
+            Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k-1)) / (t(k+1)-t(k-1));         
+        end
+        k=k+1;
+    end
+end
+
+plot(t,Euler_vel(3,:))
+
+for i=1:3
+    k=1;
+    while k<=nb_step
+        if (k==1)
+            Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k)) / (t(k+1)-t(k));
+            
+        elseif (k==nb_step)
+            Euler_vel(i,k)=(Euler_angle(i,k)-Euler_angle(i,k-1)) / (t(k)-t(k-1));
             
         elseif ( abs( Euler_angle(i,k)-Euler_angle(i,k-1) ) > angle_step ) % previous point far
             Euler_vel(i,k)=(Euler_angle(i,k+1)-Euler_angle(i,k-1) - 2*pi*sign(Euler_angle(i,k)-Euler_angle(i,k-1) ) ) / (t(k+1)-t(k-1));
@@ -96,6 +113,9 @@ for i=1:3
         k=k+1;
     end
 end
+
+hold on
+plot(t,Euler_vel(3,:))
 
 %% Computation of the angular velocity
 Omega=zeros(3,nb_step);
