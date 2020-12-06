@@ -20,40 +20,49 @@ if segment.name=="Head"
 end
 
 if segment.name=="U_Trunk"
-    pos_CoM=pos_marker+Rz*(-U_Trunk.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*(-U_Trunk.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-U_Trunk.L*z+segment.CoM);
 end
 
 if segment.name=="M_Trunk"
-    pos_CoM=pos_marker+Rz*(-M_Trunk.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*(-M_Trunk.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-M_Trunk.L*z+segment.CoM);
 end
 
 if segment.name=="L_Trunk"
-    pos_CoM=pos_marker+Rz*(-M_Trunk.L*z-L_Trunk.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*(-M_Trunk.L*z-L_Trunk.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-M_Trunk.L*z-L_Trunk.L*z+segment.CoM);
 end
 
 if segment.name=="Upperarm"
-    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Upperarm.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Upperarm.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Upperarm.L*z+segment.CoM);
 end
 
 if segment.name=="Forearm"
-    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Forearm.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Forearm.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Forearm.L*z+segment.CoM);
 end
 
 if segment.name=="Hand"
-    pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Hand.c*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_y(pi/2)*(-Hand.c*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Hand.c*z+segment.CoM);
 end
 
 if segment.name=="Thigh"
-    pos_CoM=pos_marker+Rz*rot_x(pi)*(-Thigh.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_x(pi)*(-Thigh.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Thigh.L*z+segment.CoM);
 end
 
 if segment.name=="Shank"
-    pos_CoM=pos_marker+Rz*rot_x(pi)*(-Shank.L*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_x(pi)*(-Shank.L*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Shank.L*z+segment.CoM);
 end
 
 if segment.name=="Foot"
     %pos_CoM=pos_marker+Rz*rot_x(pi/2)*(-Foot.L*z+segment.CoM);
-    pos_CoM=pos_marker+Rz*rot_x(-pi/2)*(-Foot.L/2*z+segment.CoM);
+    %pos_CoM=pos_marker+Rz*rot_x(-pi/2)*(-Foot.L/2*z+segment.CoM);
+    pos_CoM=pos_marker+Rz*R_ini(segment)*(-Foot.L/2*z+segment.CoM);
 end
 
 t=[pos_CoM; theta];

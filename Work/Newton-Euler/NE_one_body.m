@@ -28,7 +28,7 @@ theta_norm=norm(q(4:6));
 u=q(4:6)/theta_norm;
 %and we define the rotation as that unitary vector and that scalar using
 %this function:
-R=rot_u(u,theta_norm);
+R=rot_u(u,theta_norm)*R_ini(segment);
 
 %S0 is the offset distance between our local frame, and its center of
 %gravity
