@@ -269,13 +269,16 @@ plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.
 figure
 % [B,A] = butter(2,5*2*dt);
 % E=filtfilt(B,A,E);
-plot(motion.time, E+U);
+yyaxis left
+plot(motion.time, E+U,'displayname',"Mechanical energy");
 hold on
-plot(motion.time, E);
-plot(motion.time, U);
-legend("Mechanic energy","Kinetic energy","Potential energy")
+plot(motion.time, U,'displayname',"Potential energy");
+ylabel("Energy (J)")
+yyaxis right
+plot(motion.time, E,'displayname',"Kinetic energy");
 xlabel("Time (s)")
 ylabel("Energy (J)")
+legend show
 
 
 %% Tests
