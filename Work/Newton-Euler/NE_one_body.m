@@ -57,7 +57,9 @@ Ti= Tj - cross(S0,m*g) + Ii*Omega_d + m*cross(S0,vm_d) + mrot(Omega)*( Ii * Omeg
 
 
 %Energy of the CoM of the body
-Ec=0.5*m*vm'*vm+0.5*Omega'*Ii*Omega;
+Ig=R*segment.inertia*R';
+vg=qd(1:3);
+Ec=0.5*m*vg'*vg+0.5*Omega'*Ig*Omega;
 Ep=-m*g'*q(1:3);
 
 

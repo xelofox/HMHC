@@ -211,14 +211,14 @@ for k=1:nb_step
 end
 
 
-F(isnan(F))=0;
-T(isnan(T))=0;
-
-% Filter
-dt=motion.time(2)-motion.time(1);
-[B,A] = butter(2,20*2*dt);
-F_filtered=transpose(filtfilt(B,A,F'));
-T_filtered=transpose(filtfilt(B,A,T'));
+% F(isnan(F))=0;
+% T(isnan(T))=0;
+% 
+% % Filter
+% dt=motion.time(2)-motion.time(1);
+% [B,A] = butter(2,20*2*dt);
+% F_filtered=transpose(filtfilt(B,A,F'));
+% T_filtered=transpose(filtfilt(B,A,T'));
 F_filtered=F; T_filtered=T; 
 %plot
 
@@ -248,8 +248,8 @@ for k=1:length(ground.CoPx)
         -cross([ground.CoPx(k); ground.CoPy(k);0],[ground.Fx(k); ground.Fy(k);ground.Fz(k)]);
 end
 
-[B,A] = butter(3,1*2*dt);
-ground.T_CoP=transpose(filtfilt(B,A,ground.T_CoP'));
+% [B,A] = butter(3,1*2*dt);
+% ground.T_CoP=transpose(filtfilt(B,A,ground.T_CoP'));
 
 figure
 plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
