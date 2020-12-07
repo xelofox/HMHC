@@ -178,7 +178,6 @@ ymin = min(min(F2x),min(F2y));
 axis([0 xmax ymin ymax])
 plot(F2x(1:t))
 plot(F2y(1:t))
-legend('F2 x','F2 y')
 hold off
 
 pause(period)
