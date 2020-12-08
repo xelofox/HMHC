@@ -137,10 +137,10 @@ for k=1:nb_step
    
    %R Upperarm
    Shoulder=motion.J6(1:3,k)*1e-3% shoulder position
-   Fi=F_Forearm(:,k);
-   Ti=T_Forearm(:,k)+cross(Elbow-Shoulder,Fi) %expressing previous torques at the shoulder point
+   Fi=F_Hand(:,k);
+   Ti=T_Hand(:,k)+cross(Wrist-Elbow,Fi) %expressing previous torques at the shoulder point
    
-   [Fi,Ti,Ec,Ep]=NE_one_body(Fi,Ti,Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Shoulder);
+   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Upperarm.pos.R(1:3,k));
    F(:,k)=F(:,k)+Fi;
    T(:,k)=T(:,k)+Ti+cross(Upperarm.pos.R(1:3,k),Fi);
    E(k)=E(k)+Ec; U(k)=U(k)+Ep;

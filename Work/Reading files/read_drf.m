@@ -4,7 +4,7 @@
 %third: marker position and orientation
 %fourth: unknown
 clear
-Motion="mediumKickArm";
+Motion="slowSit";
 fclose("all");
 file=fopen(Motion+".drf");
 ind_time=1;
