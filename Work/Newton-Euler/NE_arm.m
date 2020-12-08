@@ -7,7 +7,7 @@ clear; %close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="quickJump";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
@@ -114,185 +114,85 @@ E=zeros(1,nb_step); U=E;
 for k=1:nb_step
    
    %R Hand
-   Wrist=motion.J10(1:3,k)*1e-3% wrist position
+   Wrist=motion.J10(1:3,k)*1e-3;% wrist position
    [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.R(:,k),Hand.vel.R(:,k),Hand.acc.R(:,k),Wrist);
-   F_Hand(:,k)=Fi;
-   T_Hand(:,k)=Ti;  
-   F(:,k)=F(:,k)+F_Hand;
-   T(:,k)=T(:,k)+T_Hand;
+   F_Wrist(:,k)=Fi;
+   T_Wrist(:,k)=Ti;  
+   F(:,k)=F(:,k)+F_Wrist(:,k);
+   T(:,k)=T(:,k)+T_Wrist(:,k);
    %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
    %R Forearm
-   Elbow=motion.J8(1:3,k)*1e-3% elbow position
-   Fi=F_Hand(:,k);
-   Ti=T_Hand(:,k)+cross(Wrist-Elbow,Fi) %expressing previous torques at the elbow point
+   Elbow=motion.J8(1:3,k)*1e-3;% elbow position
+   Fi=F_Wrist(:,k);
+   Ti=T_Wrist(:,k)+cross(Wrist-Elbow,Fi); %expressing previous torques at the elbow point
    
    [Fi,Ti,Ec,Ep]=NE_one_body(Fi,Ti,Forearm,Forearm.pos.R(:,k),Forearm.vel.R(:,k),Forearm.acc.R(:,k),Elbow);
-   F_Forearm(:,k)=Fi;
-   T_Forearm(:,k)=Ti;
-   F(:,k)=F(:,k)+F_Forearm;
-   T(:,k)=T(:,k)+T_Forearm;
+   F_Elbow(:,k)=Fi;
+   T_Elbow(:,k)=Ti;
+   F(:,k)=F(:,k)+F_Elbow(:,k);
+   T(:,k)=T(:,k)+T_Elbow(:,k);
    %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
    
    %R Upperarm
-   Shoulder=motion.J6(1:3,k)*1e-3% shoulder position
-   Fi=F_Hand(:,k);
-   Ti=T_Hand(:,k)+cross(Wrist-Elbow,Fi) %expressing previous torques at the shoulder point
+   Shoulder=motion.J6(1:3,k)*1e-3;% shoulder position
+   Fi=F_Elbow(:,k);
+   Ti=T_Elbow(:,k)+cross(Elbow-Shoulder,Fi); %expressing previous torques at the shoulder point
    
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Upperarm.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Upperarm.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
- 
-
-
-
-
+   [Fi,Ti,Ec,Ep]=NE_one_body(Fi,Ti,Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Shoulder);
+   F_Shoulder(:,k)=Fi;
+   T_Shoulder(:,k)=Ti;
+   F(:,k)=F(:,k)+F_Shoulder(:,k);
+   T(:,k)=T(:,k)+T_Shoulder(:,k);
+   %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
  
 end
 
-
-% F(isnan(F))=0;
-% T(isnan(T))=0;
-% 
-% % Filter
-% dt=motion.time(2)-motion.time(1);
-% [B,A] = butter(2,20*2*dt);
-% F_filtered=transpose(filtfilt(B,A,F'));
-% T_filtered=transpose(filtfilt(B,A,T'));
-F_filtered=F; T_filtered=T; 
+%% Changing the frame
+x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];
 for k=1:nb_step
-   F_filtered(:,k)= rot_z(pi/2)*F_filtered(:,k);
-   T_filtered(:,k)= rot_z(pi/2)*T_filtered(:,k);
+    %     theta_norm=norm(Forearm.pos.R(4:6));
+    %     u=Forearm.pos.R(4:6)/theta_norm;
+    %     R=rot_u(u,theta_norm);
+    %     T_Wrist(:,k)=R'*T_Wrist(:,k);
+    %
+    %     theta_norm=norm(Upperarm.pos.R(4:6));
+    %     u=Upperarm.pos.R(4:6)/theta_norm;
+    %     R=rot_u(u,theta_norm);
+    %     T_Elbow(:,k)=R'*T_Elbow(:,k);
+    %
+    %     theta_norm=norm(U_Trunk.pos(4:6));
+    %     u=U_Trunk.pos(4:6)/theta_norm;
+    %     R=rot_u(u,theta_norm);
+    %     T_Shoulder(:,k)=R'*T_Shoulder(:,k);
+    
+    %Wrist
+    Rx=rot_x(motion.J10(4,k)*pi/180);
+    Ry=rot_x(motion.J10(4,k)*pi/180)*rot_y(motion.J10(5,k)*pi/180);
+    Rz=rot_x(motion.J10(4,k)*pi/180)*rot_y(motion.J10(5,k)*pi/180)*rot_z(motion.J10(6,k)*pi/180);
+    
+    T1_Wrist=T_Wrist'*(Rx'*x);
+    T2_Wrist=T_Wrist'*(Ry'*y);
+    T3_Wrist=T_Wrist'*(Rz'*z);
+    
+    %Elbow
+    Rx=rot_x(motion.J8(4,k)*pi/180);
+    Ry=rot_x(motion.J8(4,k)*pi/180)*rot_y(motion.J8(5,k)*pi/180);
+    Rz=rot_x(motion.J8(4,k)*pi/180)*rot_y(motion.J8(5,k)*pi/180)*rot_z(motion.J8(6,k)*pi/180);
+    
+    T1_Elbow=T_Elbow'*(Rx'*x);
+    T2_Elbow=T_Elbow'*(Ry'*y);
+    T3_Elbow=T_Elbow'*(Rz'*z);
+    
+    %Shoulder
+    Rx=rot_x(motion.J3(4,k)*pi/180);
+    Ry=rot_x(motion.J3(4,k)*pi/180)*rot_y(motion.J3(5,k)*pi/180);
+    Rz=rot_x(motion.J3(4,k)*pi/180)*rot_y(motion.J3(5,k)*pi/180)*rot_z(motion.J3(6,k)*pi/180);
+    
+    T1_Shoulder=T_Shoulder'*(Rx'*x);
+    T2_Shoulder=T_Shoulder'*(Ry'*y);
+    T3_Shoulder=T_Shoulder'*(Rz'*z);
 end
-%plot
 
-%plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
-%plot_comparison(motion.time,[F;T],motion.time,zeros(6,length(motion.time)),["raw";"filtered"])
-
-
-%% Comparison with the data
-%figure
-
-W1=[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'];
-W2=[F_filtered;T_filtered];
-%plot_comparison(ground.time,W1,motion.time,W2,["ground";"computed"])
-% 
-% %% CoP
-% 
-CoP=zeros(3,nb_step);
-% T_CoP=CoP;
-for k=1:nb_step
-    CoP(1,k)=-T(2,k)/F(3,k);
-    CoP(2,k)=T(1,k)/F(3,k);
-    T_CoP(:,k)=T(:,k)-cross(CoP(:,k),F(:,k));
-end
-
-% plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'],...
-%    motion.time,[F_filtered;T_CoP],["ground";"computed"])
-
-for k=1:length(ground.CoPx)
-    ground.T_CoP(:,k)=[ground.Mx(k); ground.My(k);ground.Mz(k)]+...
-        -cross([ground.CoPx(k); ground.CoPy(k);0],[ground.Fx(k); ground.Fy(k);ground.Fz(k)]);
-end
-% 
-% % [B,A] = butter(3,1*2*dt);
-% % ground.T_CoP=transpose(filtfilt(B,A,ground.T_CoP'));
-% 
-% figure
-plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
-    motion.time,[F_filtered;T_CoP],["ground";"computed CoP"])
-% 
-% 
-% for k=1:nb_step
-%     T2(:,k)=T(:,k)-cross(CoP(:,1),F_filtered(:,k));
-%     T2(:,k)=T(:,k)+cross([ground.CoPx(1); ground.CoPy(1);0],F_filtered(:,k));
-% end
-% 
-% figure
-% plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'],...
-%     motion.time,[F_filtered;T2],["ground";"computed"])
-
-%% Energy
-figure
-% [B,A] = butter(2,5*2*dt);
-% E=filtfilt(B,A,E);
-yyaxis left
-plot(motion.time, E+U,'displayname',"Mechanical energy");
-hold on
-plot(motion.time, U,'displayname',"Potential energy");
-ylabel("Energy (J)")
-yyaxis right
-plot(motion.time, E,'displayname',"Kinetic energy");
-xlabel("Time (s)")
-ylabel("Energy (J)")
-legend show
-
-
-%% Tests
-
-% [vel,acc]=rm_outliers(Head.vel(4,:),Head.acc(4,:));
-% % vel=filloutliers(Head.vel(4,:),'linear','movmedian',15);
-% % acc=filloutliers(Head.acc(4,:),'linear','movmedian',15);
-% % vel=hampel(Head.vel(4,:),2);
-% % acc=hampel(Head.acc(4,:),2);
-% %[vel,acc]=rm_outliers(Upperarm.vel.R(5,:),Upperarm.acc.R(5,:));
-% figure 
-% 
-% subplot(2,1,1)
-% plot(Head.vel(4,:))
-% hold on
-% plot(vel)
-% subplot(2,1,2)
-% plot(Head.acc(4,:))
-% hold on
-% plot(acc)
-% close all
-% plot(Thigh.vel.R(6,:))
-% hold on
-% plot(motion.J16(6,:))
-% 
-% t1=10.8; t2=11.2; t1=0; t2=12; 
-% t=motion.time;
-% index=find(((t>t1).*(t<t2)));
-% i1=index(1);i2=index(end);
-% pos=motion.J16(6,:);
-% [vel,acc]=time_diff(pos,t);
-% subplot(1,3,1)
-% plot(t,pos,'-o')
-% ylabel("Angle (°)")
-% xlabel("Time (s)")
-% title("Angle")
-% axis([t1 t2 min(pos(i1:i2))*1.1 max(pos(i1:i2))*1.1])
-% subplot(1,3,2)
-% plot(t,vel,'-o')
-% ylabel("Velocity (°/s)")
-% xlabel("Time (s)")
-% axis([t1 t2 min(vel(i1:i2))*1.1 max(vel(i1:i2))*1.1+1000])
-% title("Velocity")
-% subplot(1,3,3)
-% plot(t,acc,'-o')
-% ylabel("Acceleration (°/S^2)")
-% xlabel("Time (s)")
-% axis([t1 t2 min(acc(i1:i2))*1.1 max(acc(i1:i2))*1.1])
-% title("Acceleration")
-
-
-
-
-
-
-
-% subplot(2,1,1)
-% hold off
-% plot(Upperarm.vel.R(5,:))
-% hold on
-% plot(vel)
-% subplot(2,1,2)
-% hold off
-% plot(Upperarm.acc.R(5,:))
-% hold on
-% plot(acc)

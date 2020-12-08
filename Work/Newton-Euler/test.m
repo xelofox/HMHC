@@ -4,7 +4,7 @@
 A=motion.J16(6,:);
 A=motion.J10(5,:);
 % A=Thigh.vel.L(3,:)
-plot(A)
+plot(motion.time,A)
 %hold on
 %plot(diff(A))
 %plot(ischange(A,'mean'))
