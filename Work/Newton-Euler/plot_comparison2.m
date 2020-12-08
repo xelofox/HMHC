@@ -1,6 +1,6 @@
-function []=plot_comparison(time1,W1,time2,W2,names)
+function []=plot_comparison2(time1,W1,time2,W2,names)
 
-subplot(3,2,1)
+subplot(1,3,1)
 hold off
 plot(time1,W1(1,:))
 hold on
@@ -10,7 +10,7 @@ legend(names(1),names(2))
 xlabel("Time (s)")
 ylabel("Force (N)")
 
-subplot(3,2,3)
+subplot(1,3,2)
 hold off
 plot(time1,W1(2,:))
 hold on
@@ -20,7 +20,7 @@ legend(names(1),names(2))
 xlabel("Time (s)")
 ylabel("Force (N)")
 
-subplot(3,2,5)
+subplot(1,3,3)
 hold off
 plot(time1,W1(3,:))
 hold on
@@ -30,7 +30,7 @@ legend(names(1),names(2))
 xlabel("Time (s)")
 ylabel("Force (N)")
 
-subplot(3,2,2)
+subplot(1,3,1)
 hold off
 plot(time1,W1(4,:))
 hold on
@@ -40,7 +40,7 @@ legend(names(1),names(2))
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
-subplot(3,2,4)
+subplot(1,3,2)
 hold off
 plot(time1,W1(5,:))
 hold on
@@ -50,7 +50,7 @@ legend(names(1),names(2))
 xlabel("Time (s)")
 ylabel("Torque (N.m)")
 
-subplot(3,2,6)
+subplot(1,3,3)
 hold off
 plot(time1,W1(6,:))
 hold on

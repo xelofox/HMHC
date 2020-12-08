@@ -1,4 +1,4 @@
-function [Euler_vel,Omega,Omega_d]=time_diff_angle(Euler_angle,t)
+function [Omega,Omega_d]=time_diff_angle(Euler_angle,t)
 
 nb_step=length(t);
 Euler_vel=zeros(3,nb_step);

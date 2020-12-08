@@ -15,7 +15,7 @@ Hanavan;
 %array
 load(Motion+"_q.mat")
 motion.time=adapt_time(Motion,motion.time);
-
+%motion.time=motion.time-motion.time(1);
 % Data from ground
 load(Motion+"_ground.mat")
 
@@ -258,9 +258,18 @@ end
 % % [B,A] = butter(3,1*2*dt);
 % % ground.T_CoP=transpose(filtfilt(B,A,ground.T_CoP'));
 % 
+
+
+
+
 % figure
+% plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
+%     motion.time,[F_filtered;T_CoP],["Force plate";"NE algo"])
 plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
-    motion.time,[F_filtered;T_CoP],["ground";"computed CoP"])
+    motion.time,[F_filtered;T_CoP],["Force plate";"NE algo"])
+
+
+
 % 
 % 
 % for k=1:nb_step
@@ -273,19 +282,19 @@ plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
 %     motion.time,[F_filtered;T2],["ground";"computed"])
 
 %% Energy
-figure
-% [B,A] = butter(2,5*2*dt);
-% E=filtfilt(B,A,E);
-yyaxis left
-plot(motion.time, E+U,'displayname',"Mechanical energy");
-hold on
-plot(motion.time, U,'displayname',"Potential energy");
-ylabel("Energy (J)")
-yyaxis right
-plot(motion.time, E,'displayname',"Kinetic energy");
-xlabel("Time (s)")
-ylabel("Energy (J)")
-legend show
+% figure
+% % [B,A] = butter(2,5*2*dt);
+% % E=filtfilt(B,A,E);
+% yyaxis left
+% plot(motion.time, E+U,'displayname',"Mechanical energy");
+% hold on
+% plot(motion.time, U,'displayname',"Potential energy");
+% ylabel("Energy (J)")
+% yyaxis right
+% plot(motion.time, E,'displayname',"Kinetic energy");
+% xlabel("Time (s)")
+% ylabel("Energy (J)")
+% legend show
 
 
 %% Tests

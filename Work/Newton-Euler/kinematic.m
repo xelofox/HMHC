@@ -11,7 +11,7 @@ end
 
 
 
-[Euler_vel,Omega,Omega_d]=time_diff_angle(Euler_angle,t);
+[Omega,Omega_d]=time_diff_angle(Euler_angle,t);
  
 
 %% Computation of the marker vel and acc

@@ -2,7 +2,7 @@
 % legend("1","2","3","4","5","6")
 %hold off
 A=motion.J16(6,:);
-A=motion.J10(5,:);
+A=motion.J10(3,:);
 % A=Thigh.vel.L(3,:)
 plot(motion.time,A)
 %hold on
