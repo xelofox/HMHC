@@ -21,4 +21,6 @@ I(2,2)=(1/4)*m*A_abcd4(a0,a1,a0,a1,a0,a1,b0,b1)/A_ab1(a0,a1,b0,b1) +...
 
 I(3,3)=(1/4)*m*( A_abcd4(a0,a1,a0,a1,a0,a1,b0,b1) + A_abcd4(a0,a1,b0,b1,b0,b1,b0,b1) )/A_ab1(a0,a1,b0,b1);
 
+I=I-m*matrix_huygens([0;0;segment.CoM]);
+
 end

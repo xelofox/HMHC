@@ -176,16 +176,16 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
 Mtot=80;
 P=P*100; % Appropriate values to use when applying lesson prediction mass formula?
 
-% Hand.m=Mtot*Hand.volume/Vtot;
-% Forearm.m=Mtot*Forearm.volume/Vtot;
-% Upperarm.m=Mtot*Upperarm.volume/Vtot;
-% Foot.m=Mtot*Foot.volume/Vtot;
-% Shank.m=Mtot*Shank.volume/Vtot;
-% Thigh.m=Mtot*Thigh.volume/Vtot;
-% Head.m=Mtot*Head.volume/Vtot;
-% U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
-% M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
-% L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
+Hand.m=Mtot*Hand.volume/Vtot;
+Forearm.m=Mtot*Forearm.volume/Vtot;
+Upperarm.m=Mtot*Upperarm.volume/Vtot;
+Foot.m=Mtot*Foot.volume/Vtot;
+Shank.m=Mtot*Shank.volume/Vtot;
+Thigh.m=Mtot*Thigh.volume/Vtot;
+Head.m=Mtot*Head.volume/Vtot;
+U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
+M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
+L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
 
 Hand.m=0.038*P(15) + 0.080*P(32) - 0.660;
 Forearm.m= 0.081*Mtot + 0.052*P(16) - 1.650;
@@ -207,6 +207,20 @@ L_Trunk.m=1.01*L_Trunk.volume*sf;
 M=2*(Hand.m+Forearm.m+Upperarm.m+Foot.m+Shank.m+Thigh.m)+Head.m+U_Trunk.m+M_Trunk.m+L_Trunk.m;
 disp("Sum of the masses= "+num2str(M)+" kg")
 
+%% CoM
+%Here we compute the center of mass depending on the group.
+%The SE group are elipsoids or spheres, which mean the relativa CoM = 0
+Hand.CoM=[0;0;0];
+Forearm.CoM=CoM_ES_group(Forearm);
+Upperarm.CoM=CoM_ES_group(Upperarm);
+Foot.CoM=CoM_ES_group(Foot);
+Shank.CoM=CoM_ES_group(Shank);
+Thigh.CoM=CoM_ES_group(Thigh);
+Head.CoM=[0;0;0];
+U_Trunk.CoM=CoM_ES_group(U_Trunk);
+M_Trunk.CoM=CoM_ES_group(M_Trunk);
+L_Trunk.CoM=CoM_ES_group(L_Trunk);
+
 %% Inertia
 %Here this functions returns us the Inertia of each body part. Each body
 %part uses a different Inertia equation deppending on the group
@@ -221,16 +235,3 @@ U_Trunk.inertia=Inertia_ES_group(U_Trunk);
 M_Trunk.inertia=Inertia_ES_group(M_Trunk);
 L_Trunk.inertia=Inertia_ES_group(L_Trunk);
 
-%% CoM
-%Here we compute the center of mass depending on the group.
-%The SE group are elipsoids or spheres, which mean the relativa CoM = 0
-Hand.CoM=[0;0;0];
-Forearm.CoM=CoM_ES_group(Forearm);
-Upperarm.CoM=CoM_ES_group(Upperarm);
-Foot.CoM=CoM_ES_group(Foot);
-Shank.CoM=CoM_ES_group(Shank);
-Thigh.CoM=CoM_ES_group(Thigh);
-Head.CoM=[0;0;0];
-U_Trunk.CoM=CoM_ES_group(U_Trunk);
-M_Trunk.CoM=CoM_ES_group(M_Trunk);
-L_Trunk.CoM=CoM_ES_group(L_Trunk);

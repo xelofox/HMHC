@@ -112,102 +112,37 @@ E=zeros(1,nb_step); U=E;
 %Here we compute the reactions of each body part using the Newton-Euler
 %equations
 for k=1:nb_step
-   %Head
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Head,Head.pos(:,k),Head.vel(:,k),Head.acc(:,k),Head.pos(1:3,k));
+   
+   %R Hand
+   Wrist=motion.J10(1:3,k)*1e-3% wrist position
+   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.R(:,k),Hand.vel.R(:,k),Hand.acc.R(:,k),Wrist);
+   F_Hand(:,k)=Fi;
+   F_Hand(:,k)=Ti;  
+   F(:,k)=F(:,k)+F_Hand;
+   T(:,k)=T(:,k)+F_Hand;
+   %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
+
+   %R Forearm
+   Elbow=motion.J8(1:3,k)*1e-3% elbow position
+   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Forearm,Forearm.pos.R(:,k),Forearm.vel.R(:,k),Forearm.acc.R(:,k),Forearm.pos.R(1:3,k));
    F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Head.pos(1:3,k),Fi);
+   T(:,k)=T(:,k)+Ti+cross(Forearm.pos.R(1:3,k),Fi);
    E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %U_Trunk
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),U_Trunk,U_Trunk.pos(:,k),U_Trunk.vel(:,k),U_Trunk.acc(:,k),U_Trunk.pos(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(U_Trunk.pos(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %M_Trunk
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),M_Trunk,M_Trunk.pos(:,k),M_Trunk.vel(:,k),M_Trunk.acc(:,k),M_Trunk.pos(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(M_Trunk.pos(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %L_Trunk
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),L_Trunk,L_Trunk.pos(:,k),L_Trunk.vel(:,k),L_Trunk.acc(:,k),L_Trunk.pos(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(L_Trunk.pos(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
+   
    %R Upperarm
    [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Upperarm.pos.R(1:3,k));
    F(:,k)=F(:,k)+Fi;
    T(:,k)=T(:,k)+Ti+cross(Upperarm.pos.R(1:3,k),Fi);
    E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %L Upperarm
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Upperarm,Upperarm.pos.L(:,k),Upperarm.vel.L(:,k),Upperarm.acc.L(:,k),Upperarm.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Upperarm.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
+ 
 
-   %R Forearm
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Forearm,Forearm.pos.R(:,k),Forearm.vel.R(:,k),Forearm.acc.R(:,k),Forearm.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Forearm.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %L Forearm
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Forearm,Forearm.pos.L(:,k),Forearm.vel.L(:,k),Forearm.acc.L(:,k),Forearm.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Forearm.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %R Hand
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.R(:,k),Hand.vel.R(:,k),Hand.acc.R(:,k),Hand.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Hand.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %L Hand
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.L(:,k),Hand.vel.L(:,k),Hand.acc.L(:,k),Hand.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Hand.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
-   %R Thigh
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Thigh,Thigh.pos.R(:,k),Thigh.vel.R(:,k),Thigh.acc.R(:,k),Thigh.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Thigh.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %L Thigh
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Thigh,Thigh.pos.L(:,k),Thigh.vel.L(:,k),Thigh.acc.L(:,k),Thigh.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Thigh.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %R Shank
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Shank,Shank.pos.R(:,k),Shank.vel.R(:,k),Shank.acc.R(:,k),Shank.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Shank.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %L Shank
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Shank,Shank.pos.L(:,k),Shank.vel.L(:,k),Shank.acc.L(:,k),Shank.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Shank.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %R Foot
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Foot,Foot.pos.R(:,k),Foot.vel.R(:,k),Foot.acc.R(:,k),Foot.pos.R(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Foot.pos.R(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
-   %L Foot
-   [Fi,Ti,Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Foot,Foot.pos.L(:,k),Foot.vel.L(:,k),Foot.acc.L(:,k),Foot.pos.L(1:3,k));
-   F(:,k)=F(:,k)+Fi;
-   T(:,k)=T(:,k)+Ti+cross(Foot.pos.L(1:3,k),Fi);
-   E(k)=E(k)+Ec; U(k)=U(k)+Ep;
-
+ 
 end
 
 

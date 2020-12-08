@@ -52,7 +52,7 @@ vm_d=qdd(1:3)+cross(S0,Omega_d)+mrot(Omega)*cross(S0,Omega);
 
 %Formulas of the Newten Euler equations seen in the AMORO lessons expressed
 %in the world frame
-Fi= Fj - m*g + m*vm_d + m*cross(Omega_d,S0) + m*mrot(Omega)*cross(Omega,S0);
+Fi= Fj - m*g + m*vm_d + m*cross(Omega_d,S0) + m*cross(Omega,cross(Omega,S0));
 Ti= Tj - cross(S0,m*g) + Ii*Omega_d + m*cross(S0,vm_d) + mrot(Omega)*( Ii * Omega );
 
 

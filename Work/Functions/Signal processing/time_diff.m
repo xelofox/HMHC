@@ -18,6 +18,9 @@ for k=1:L
     end
 end
 
+dt=t(2)-t(1);
+qd=signal_filter(qd,dt);
+
 for k=1:L
     if k==1
         qdd(:,k)=(qd(:,k+1)-qd(:,k)) / (t(k+1)-t(k));
@@ -27,5 +30,7 @@ for k=1:L
         qdd(:,k)=(qd(:,k+1)-qd(:,k-1)) / (t(k+1)-t(k-1));
     end
 end
+%qdd=signal_filter(qdd,dt);
+
 
 end

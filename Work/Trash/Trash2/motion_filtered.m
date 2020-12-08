@@ -7,126 +7,126 @@ dt=motion.time(2)-motion.time(1);
 
 mf=motion;
 
-for i=1:6
-    for j=2:length(motion.q1(1,:))
-        %% q
-        if isnan(mf.q1(i,j))
-            mf.q1(i,j)=mf.q1(i,j-1);
-        end
-        if isnan(mf.q2(i,j))
-            mf.q2(i,j)=mf.q2(i,j-1);
-        end
-        if isnan(mf.q3(i,j))
-            mf.q3(i,j)=mf.q3(i,j-1);
-        end
-        if isnan(mf.q4(i,j))
-            mf.q4(i,j)=mf.q4(i,j-1);
-        end
-        if isnan(mf.q5(i,j))
-            mf.q5(i,j)=mf.q5(i,j-1);
-        end
-        if isnan(mf.q6(i,j))
-            mf.q6(i,j)=mf.q6(i,j-1);
-        end
-        if isnan(mf.q7(i,j))
-            mf.q7(i,j)=mf.q7(i,j-1);
-        end
-        if isnan(mf.q8(i,j))
-            mf.q8(i,j)=mf.q8(i,j-1);
-        end 
-        if isnan(mf.q9(i,j))
-            mf.q9(i,j)=mf.q9(i,j-1);
-        end 
-        if isnan(mf.q10(i,j))
-            mf.q10(i,j)=mf.q10(i,j-1);
-        end 
-        if isnan(mf.q11(i,j))
-            mf.q11(i,j)=mf.q11(i,j-1);
-        end 
-        if isnan(mf.q12(i,j))
-            mf.q12(i,j)=mf.q12(i,j-1);
-        end 
-        if isnan(mf.q13(i,j))
-            mf.q13(i,j)=mf.q13(i,j-1);
-        end 
-        if isnan(mf.q14(i,j))
-            mf.q14(i,j)=mf.q14(i,j-1);
-        end 
-        if isnan(mf.q15(i,j))
-            mf.q15(i,j)=mf.q15(i,j-1);
-        end 
-        if isnan(mf.q16(i,j))
-            mf.q16(i,j)=mf.q16(i,j-1);
-        end 
-        if isnan(mf.q17(i,j))
-            mf.q17(i,j)=mf.q17(i,j-1);
-        end 
-        
-        %% J
-        if isnan(mf.J1(i,j))
-            mf.J1(i,j)=mf.J1(i,j-1);
-        end
-        if isnan(mf.J2(i,j))
-            mf.J2(i,j)=mf.J2(i,j-1);
-        end
-        if isnan(mf.J3(i,j))
-            mf.J3(i,j)=mf.J3(i,j-1);
-        end
-        if isnan(mf.J4(i,j))
-            mf.J4(i,j)=mf.J4(i,j-1);
-        end
-        if isnan(mf.J5(i,j))
-            mf.J5(i,j)=mf.J5(i,j-1);
-        end
-        if isnan(mf.J6(i,j))
-            mf.J6(i,j)=mf.J6(i,j-1);
-        end
-        if isnan(mf.J7(i,j))
-            mf.J7(i,j)=mf.J7(i,j-1);
-        end
-        if isnan(mf.J8(i,j))
-            mf.J8(i,j)=mf.J8(i,j-1);
-        end 
-        if isnan(mf.J9(i,j))
-            mf.J9(i,j)=mf.J9(i,j-1);
-        end 
-        if isnan(mf.J11(i,j))
-            mf.J11(i,j)=mf.J10(i,j-1);
-        end 
-        if isnan(mf.J11(i,j))
-            mf.J11(i,j)=mf.J11(i,j-1);
-        end 
-        if isnan(mf.J12(i,j))
-            mf.J12(i,j)=mf.J12(i,j-1);
-        end 
-        if isnan(mf.J13(i,j))
-            mf.J13(i,j)=mf.J13(i,j-1);
-        end 
-        if isnan(mf.J14(i,j))
-            mf.J14(i,j)=mf.J14(i,j-1);
-        end 
-        if isnan(mf.J15(i,j))
-            mf.J15(i,j)=mf.J15(i,j-1);
-        end 
-        if isnan(mf.J16(i,j))
-            mf.J16(i,j)=mf.J16(i,j-1);
-        end 
-        if isnan(mf.J17(i,j))
-            mf.J17(i,j)=mf.J17(i,j-1);
-        end 
-        if isnan(mf.J18(i,j))
-            mf.J18(i,j)=mf.J18(i,j-1);
-        end 
-        if isnan(mf.J19(i,j))
-            mf.J19(i,j)=mf.J19(i,j-1);
-        end 
-        if isnan(mf.J20(i,j))
-            mf.J20(i,j)=mf.J20(i,j-1);
-        end 
-        
-
-    end
-end
+% for i=1:6
+%     for j=2:length(motion.q1(1,:))
+%         %% q
+%         if isnan(mf.q1(i,j))
+%             mf.q1(i,j)=mf.q1(i,j-1);
+%         end
+%         if isnan(mf.q2(i,j))
+%             mf.q2(i,j)=mf.q2(i,j-1);
+%         end
+%         if isnan(mf.q3(i,j))
+%             mf.q3(i,j)=mf.q3(i,j-1);
+%         end
+%         if isnan(mf.q4(i,j))
+%             mf.q4(i,j)=mf.q4(i,j-1);
+%         end
+%         if isnan(mf.q5(i,j))
+%             mf.q5(i,j)=mf.q5(i,j-1);
+%         end
+%         if isnan(mf.q6(i,j))
+%             mf.q6(i,j)=mf.q6(i,j-1);
+%         end
+%         if isnan(mf.q7(i,j))
+%             mf.q7(i,j)=mf.q7(i,j-1);
+%         end
+%         if isnan(mf.q8(i,j))
+%             mf.q8(i,j)=mf.q8(i,j-1);
+%         end 
+%         if isnan(mf.q9(i,j))
+%             mf.q9(i,j)=mf.q9(i,j-1);
+%         end 
+%         if isnan(mf.q10(i,j))
+%             mf.q10(i,j)=mf.q10(i,j-1);
+%         end 
+%         if isnan(mf.q11(i,j))
+%             mf.q11(i,j)=mf.q11(i,j-1);
+%         end 
+%         if isnan(mf.q12(i,j))
+%             mf.q12(i,j)=mf.q12(i,j-1);
+%         end 
+%         if isnan(mf.q13(i,j))
+%             mf.q13(i,j)=mf.q13(i,j-1);
+%         end 
+%         if isnan(mf.q14(i,j))
+%             mf.q14(i,j)=mf.q14(i,j-1);
+%         end 
+%         if isnan(mf.q15(i,j))
+%             mf.q15(i,j)=mf.q15(i,j-1);
+%         end 
+%         if isnan(mf.q16(i,j))
+%             mf.q16(i,j)=mf.q16(i,j-1);
+%         end 
+%         if isnan(mf.q17(i,j))
+%             mf.q17(i,j)=mf.q17(i,j-1);
+%         end 
+%         
+%         %% J
+%         if isnan(mf.J1(i,j))
+%             mf.J1(i,j)=mf.J1(i,j-1);
+%         end
+%         if isnan(mf.J2(i,j))
+%             mf.J2(i,j)=mf.J2(i,j-1);
+%         end
+%         if isnan(mf.J3(i,j))
+%             mf.J3(i,j)=mf.J3(i,j-1);
+%         end
+%         if isnan(mf.J4(i,j))
+%             mf.J4(i,j)=mf.J4(i,j-1);
+%         end
+%         if isnan(mf.J5(i,j))
+%             mf.J5(i,j)=mf.J5(i,j-1);
+%         end
+%         if isnan(mf.J6(i,j))
+%             mf.J6(i,j)=mf.J6(i,j-1);
+%         end
+%         if isnan(mf.J7(i,j))
+%             mf.J7(i,j)=mf.J7(i,j-1);
+%         end
+%         if isnan(mf.J8(i,j))
+%             mf.J8(i,j)=mf.J8(i,j-1);
+%         end 
+%         if isnan(mf.J9(i,j))
+%             mf.J9(i,j)=mf.J9(i,j-1);
+%         end 
+%         if isnan(mf.J11(i,j))
+%             mf.J11(i,j)=mf.J10(i,j-1);
+%         end 
+%         if isnan(mf.J11(i,j))
+%             mf.J11(i,j)=mf.J11(i,j-1);
+%         end 
+%         if isnan(mf.J12(i,j))
+%             mf.J12(i,j)=mf.J12(i,j-1);
+%         end 
+%         if isnan(mf.J13(i,j))
+%             mf.J13(i,j)=mf.J13(i,j-1);
+%         end 
+%         if isnan(mf.J14(i,j))
+%             mf.J14(i,j)=mf.J14(i,j-1);
+%         end 
+%         if isnan(mf.J15(i,j))
+%             mf.J15(i,j)=mf.J15(i,j-1);
+%         end 
+%         if isnan(mf.J16(i,j))
+%             mf.J16(i,j)=mf.J16(i,j-1);
+%         end 
+%         if isnan(mf.J17(i,j))
+%             mf.J17(i,j)=mf.J17(i,j-1);
+%         end 
+%         if isnan(mf.J18(i,j))
+%             mf.J18(i,j)=mf.J18(i,j-1);
+%         end 
+%         if isnan(mf.J19(i,j))
+%             mf.J19(i,j)=mf.J19(i,j-1);
+%         end 
+%         if isnan(mf.J20(i,j))
+%             mf.J20(i,j)=mf.J20(i,j-1);
+%         end 
+%         
+% 
+%     end
+% end
 
 
 
