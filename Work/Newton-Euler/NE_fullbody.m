@@ -7,7 +7,7 @@ clear; %close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="fastKickArm";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
