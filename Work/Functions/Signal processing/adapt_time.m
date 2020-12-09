@@ -15,7 +15,7 @@ elseif Motion=="custom"
     
     
 else
-    newTime=time-time(1)+1.25;
+    newTime=time-time(1);
 end
 
 
