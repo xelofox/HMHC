@@ -214,55 +214,31 @@ for k=1:nb_step
 end
 
 
-% F(isnan(F))=0;
-% T(isnan(T))=0;
-% 
-% % Filter
-% dt=motion.time(2)-motion.time(1);
-% [B,A] = butter(2,20*2*dt);
-% F_filtered=transpose(filtfilt(B,A,F'));
-% T_filtered=transpose(filtfilt(B,A,T'));
-F_filtered=F; T_filtered=T; 
-for k=1:nb_step
-   F_filtered(:,k)= rot_z(pi/2)*F_filtered(:,k);
-   T_filtered(:,k)= rot_z(pi/2)*T_filtered(:,k);
-end
-%plot
-
-%plot_comparison(motion.time,[F;T],motion.time,[F_filtered;T_filtered],["raw";"filtered"])
-%plot_comparison(motion.time,[F;T],motion.time,zeros(6,length(motion.time)),["raw";"filtered"])
-
 
 %% Comparison with the data
-% The function plot_comparison compares the plots between the Reactions
-% cobtaning from the simulations and the ones obtained from the
-% measurements of the force-plate
+% The function plot_comparison compares the plots between the ground
+% reaction efforts computed from the motion capture and the ones
+%  obtained from themeasurements of the force-plate
 
-W1=[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'];
-W2=[F_filtered;T_filtered];
-%plot_comparison(ground.time,W1,motion.time,W2,["ground";"computed"])
-% 
-% %% CoP
-% 
+
+% Rotation of the frame to alignm the two reference frame orientation
+for k=1:nb_step
+   F(:,k)= rot_z(pi/2)*F(:,k);
+   T(:,k)= rot_z(pi/2)*T(:,k);
+end
+
+% Computation of the CoP
 CoP=zeros(3,nb_step);
-% T_CoP=CoP;
 for k=1:nb_step
     CoP(1,k)=-T(2,k)/F(3,k);
     CoP(2,k)=T(1,k)/F(3,k);
     T_CoP(:,k)=T(:,k)-cross(CoP(:,k),F(:,k));
 end
 
-% plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'],...
-%    motion.time,[F_filtered;T_CoP],["ground";"computed"])
-
 for k=1:length(ground.CoPx)
     ground.T_CoP(:,k)=[ground.Mx(k); ground.My(k);ground.Mz(k)]+...
         -cross([ground.CoPx(k); ground.CoPy(k);0],[ground.Fx(k); ground.Fy(k);ground.Fz(k)]);
 end
-% 
-% % [B,A] = butter(3,1*2*dt);
-% % ground.T_CoP=transpose(filtfilt(B,A,ground.T_CoP'));
-% 
 
 
 
@@ -271,20 +247,8 @@ end
 % plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
 %     motion.time,[F_filtered;T_CoP],["Force plate";"NE algo"])
 plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
-    motion.time,[F_filtered;T_CoP],["Force plate";"NE algo"])
+    motion.time,[F;T_CoP],["Force plate";"NE algo"])
 
-
-
-% 
-% 
-% for k=1:nb_step
-%     T2(:,k)=T(:,k)-cross(CoP(:,1),F_filtered(:,k));
-%     T2(:,k)=T(:,k)+cross([ground.CoPx(1); ground.CoPy(1);0],F_filtered(:,k));
-% end
-% 
-% figure
-% plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'],...
-%     motion.time,[F_filtered;T2],["ground";"computed"])
 
 %% Energy
 % figure
@@ -302,67 +266,3 @@ plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
 % legend show
 
 
-%% Tests
-
-% [vel,acc]=rm_outliers(Head.vel(4,:),Head.acc(4,:));
-% % vel=filloutliers(Head.vel(4,:),'linear','movmedian',15);
-% % acc=filloutliers(Head.acc(4,:),'linear','movmedian',15);
-% % vel=hampel(Head.vel(4,:),2);
-% % acc=hampel(Head.acc(4,:),2);
-% %[vel,acc]=rm_outliers(Upperarm.vel.R(5,:),Upperarm.acc.R(5,:));
-% figure 
-% 
-% subplot(2,1,1)
-% plot(Head.vel(4,:))
-% hold on
-% plot(vel)
-% subplot(2,1,2)
-% plot(Head.acc(4,:))
-% hold on
-% plot(acc)
-% close all
-% plot(Thigh.vel.R(6,:))
-% hold on
-% plot(motion.J16(6,:))
-% 
-% t1=10.8; t2=11.2; t1=0; t2=12; 
-% t=motion.time;
-% index=find(((t>t1).*(t<t2)));
-% i1=index(1);i2=index(end);
-% pos=motion.J16(6,:);
-% [vel,acc]=time_diff(pos,t);
-% subplot(1,3,1)
-% plot(t,pos,'-o')
-% ylabel("Angle (°)")
-% xlabel("Time (s)")
-% title("Angle")
-% axis([t1 t2 min(pos(i1:i2))*1.1 max(pos(i1:i2))*1.1])
-% subplot(1,3,2)
-% plot(t,vel,'-o')
-% ylabel("Velocity (°/s)")
-% xlabel("Time (s)")
-% axis([t1 t2 min(vel(i1:i2))*1.1 max(vel(i1:i2))*1.1+1000])
-% title("Velocity")
-% subplot(1,3,3)
-% plot(t,acc,'-o')
-% ylabel("Acceleration (°/S^2)")
-% xlabel("Time (s)")
-% axis([t1 t2 min(acc(i1:i2))*1.1 max(acc(i1:i2))*1.1])
-% title("Acceleration")
-
-
-
-
-
-
-
-% subplot(2,1,1)
-% hold off
-% plot(Upperarm.vel.R(5,:))
-% hold on
-% plot(vel)
-% subplot(2,1,2)
-% hold off
-% plot(Upperarm.acc.R(5,:))
-% hold on
-% plot(acc)

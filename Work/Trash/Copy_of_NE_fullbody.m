@@ -163,3 +163,31 @@ for k=1:size(J1,2)
 %    [X,Y,Z]=trans_rot2(X,Y,Z,motion.J17(:,k));
 %    %[X,Y,Z]=trans_rot(X,Y,Z,[motion.J17(1:3,k);-motion.J17(4:6,k)]);
 end
+
+
+
+
+% t1=10.8; t2=11.2; t1=0; t2=12; 
+% t=motion.time;
+% index=find(((t>t1).*(t<t2)));
+% i1=index(1);i2=index(end);
+% pos=motion.J16(6,:);
+% [vel,acc]=time_diff(pos,t);
+% subplot(1,3,1)
+% plot(t,pos,'-o')
+% ylabel("Angle (°)")
+% xlabel("Time (s)")
+% title("Angle")
+% axis([t1 t2 min(pos(i1:i2))*1.1 max(pos(i1:i2))*1.1])
+% subplot(1,3,2)
+% plot(t,vel,'-o')
+% ylabel("Velocity (°/s)")
+% xlabel("Time (s)")
+% axis([t1 t2 min(vel(i1:i2))*1.1 max(vel(i1:i2))*1.1+1000])
+% title("Velocity")
+% subplot(1,3,3)
+% plot(t,acc,'-o')
+% ylabel("Acceleration (°/S^2)")
+% xlabel("Time (s)")
+% axis([t1 t2 min(acc(i1:i2))*1.1 max(acc(i1:i2))*1.1])
+% title("Acceleration")
