@@ -240,13 +240,16 @@ for k=1:length(ground.CoPx)
         -cross([ground.CoPx(k); ground.CoPy(k);0],[ground.Fx(k); ground.Fy(k);ground.Fz(k)]);
 end
 
+% dt=motion.time(2)-motion.time(1);
+% [B,A] = butter(2,5*2*dt);
+% T_CoP(3,:)=filtfilt(B,A,T_CoP(3,:));
 
 
 
 % figure
 % plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
 %     motion.time,[F_filtered;T_CoP],["Force plate";"NE algo"])
-plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
+plot_comparison2(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...
     motion.time,[F;T_CoP],["Force plate";"NE algo"])
 
 

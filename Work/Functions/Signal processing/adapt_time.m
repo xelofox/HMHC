@@ -32,6 +32,7 @@ elseif Motion=="medJump"
 elseif Motion=="quickJump"
     newTime=time-time(1)+1.25;  
 elseif Motion=="slowArm"
+    %newTime=time-time(1)+1.95; 
     newTime=time-time(1)+2; 
 elseif Motion=="slowKick"
     newTime=time-time(1)+1.25;     
