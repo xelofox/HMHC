@@ -1,4 +1,5 @@
 function I=matrix_huygens(S)
+%Function to translate the Inertia with respecto to one point, to another
 a=S(1);
 b=S(2);
 c=S(3);

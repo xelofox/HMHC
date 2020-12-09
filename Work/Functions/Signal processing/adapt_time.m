@@ -1,4 +1,8 @@
+%The data gathered from the cameras and the data gathered from the
+%force-plate are not syncronised. This function adds an small offset to the
+%time in order to compensate this difference.
 function newTime= adapt_time(Motion,time)
+
 if Motion=="custom2"
     newTime=time-time(1)+1.25; 
 elseif Motion=="custom"
@@ -34,11 +38,13 @@ elseif Motion=="slowKick"
 elseif Motion=="slowKickArm"
     newTime=time-time(1)+1.50;   
 elseif Motion=="slowSit"
+<<<<<<< HEAD
     newTime=time-time(1)+2;
 
-
+=======
+    newTime=time-time(1)+2;  
     
-    
+>>>>>>> e0ccf19dc8190a8233810922d2c41acb1aa6d520
 else
     newTime=time-time(1);
 end

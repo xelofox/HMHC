@@ -7,7 +7,7 @@ clear; %close all;
 %the simulator
 %We currently have 3 possible motions:
 %"slowArm", "mediumKick" and "maxJump"
-Motion="mediumKickArm";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before
@@ -28,6 +28,8 @@ load(Motion+"_ground.mat")
 %and we convert the last 3 values of each J vector from º to rad
 nb_step=length(motion.time);
 
+% The function CoM_pos_orientation returs us with the position and the
+% orientation of the CoM of a segment
 for k=1:nb_step
     Head.pos(:,k)=CoM_pos_orientation(Head,motion.J4(:,k));
     U_Trunk.pos(:,k)=CoM_pos_orientation(U_Trunk,motion.J3(:,k));
@@ -87,7 +89,8 @@ for k=1:6
 end
 
 
-
+% The kinematic function returns us the angular position, angular velocity 
+% and angular orientation of the CoM of the body
 [Head.pos,Head.vel,Head.acc]=kinematic(Head,motion.time,motion.J4);
 [U_Trunk.pos,U_Trunk.vel,U_Trunk.acc]=kinematic(U_Trunk,motion.time,motion.J3);
 [M_Trunk.pos,M_Trunk.vel,M_Trunk.acc]=kinematic(M_Trunk,motion.time,motion.J2);
@@ -231,7 +234,9 @@ end
 
 
 %% Comparison with the data
-%figure
+% The function plot_comparison compares the plots between the Reactions
+% cobtaning from the simulations and the ones obtained from the
+% measurements of the force-plate
 
 W1=[ground.Fx';ground.Fy';ground.Fz';ground.Mx';ground.My';ground.Mz'];
 W2=[F_filtered;T_filtered];

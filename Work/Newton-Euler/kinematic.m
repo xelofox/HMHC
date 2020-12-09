@@ -1,4 +1,6 @@
 function [pos,vel,acc]=kinematic(segment,t,q)
+%Function that provides us the position, velocity and acceleration of the
+%Center of Mass of each segment
 
 nb_step=length(t);
 
@@ -7,9 +9,6 @@ pos=zeros(6,nb_step);
 for k=1:nb_step
     pos(:,k)=CoM_pos_orientation(segment,q(:,k));
 end
-
-
-
 
 [Omega,Omega_d]=time_diff_angle(Euler_angle,t);
  
@@ -22,7 +21,8 @@ marker_pos=q(1:3,:)*1e-3;
 
 %% Computation of the CoM vel and acc
 
-CoM_vel=zeros(3,nb_step); CoM_acc=CoM_vel;
+CoM_vel=zeros(3,nb_step);
+CoM_acc=CoM_vel;
 
 for k=1:nb_step
     CoM_pos=pos(1:3,k);

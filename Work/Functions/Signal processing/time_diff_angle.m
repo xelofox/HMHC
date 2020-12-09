@@ -1,3 +1,5 @@
+
+
 function [Omega,Omega_d]=time_diff_angle(Euler_angle,t)
 
 nb_step=length(t);
@@ -5,7 +7,8 @@ Euler_vel=zeros(3,nb_step);
 angle_step=150*pi/180; %degree
 
 %% Computation of the derivative of euler angle
-
+%We apply a discrete time derivative to each array of angles
+% qd(k)=(q(k+1)-q(k)) / (t(k+1)-t(k));
 
 for i=1:3
     k=1;
@@ -38,6 +41,8 @@ dt=t(2)-t(1);
 Euler_vel=signal_filter(Euler_vel,dt);
 
 %% Computation of the angular velocity
+%Is the same value gathered from before (the derivatives) but pplying a
+%rotation
 x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];
 Omega=zeros(3,nb_step);
 for k=1:nb_step
@@ -52,6 +57,7 @@ for k=1:nb_step
 end
 
 %% Computation of the angular acceleration
+%derivative of the previous
 Omega_d=zeros(3,nb_step);
 for k=1:nb_step
     if k==1

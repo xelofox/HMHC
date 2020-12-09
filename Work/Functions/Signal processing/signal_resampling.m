@@ -15,8 +15,4 @@ sample_new=length(newT);
 signal=resample(signal,sample_new,sample_actual);
 T=resample(T,sample_new,sample_actual);
 
-
-
-
-
 end

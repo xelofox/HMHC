@@ -1,3 +1,6 @@
+% this functions compares the plots between the Reactions obtaning from the
+% simulations and the ones obtained from the measurements of the
+% force-plate
 function []=plot_comparison(time1,W1,time2,W2,names)
 
 subplot(3,2,1)
