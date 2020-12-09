@@ -38,13 +38,7 @@ elseif Motion=="slowKick"
 elseif Motion=="slowKickArm"
     newTime=time-time(1)+1.50;   
 elseif Motion=="slowSit"
-<<<<<<< HEAD
     newTime=time-time(1)+2;
-
-=======
-    newTime=time-time(1)+2;  
-    
->>>>>>> e0ccf19dc8190a8233810922d2c41acb1aa6d520
 else
     newTime=time-time(1);
 end
