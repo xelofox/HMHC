@@ -44,7 +44,7 @@ I0=I0+m*matrix_huygens(Si);
 %Expressed inertia matrix in the world frame
 Ii=R*I0*R';
 
-%Velocity and acceleration of the CoM of the body
+%Velocity and acceleration of the joint of the body
 Omega=qd(4:6);
 vm=qd(1:3)+ cross(S0,Omega);
 Omega_d=qdd(4:6);
