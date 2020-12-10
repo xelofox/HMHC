@@ -1,6 +1,6 @@
 %Made by Nicolas Testard if there is any question
 
-Motion="maxJump";
+Motion="fastArm";
 Hanavan;
 load(Motion+"_q.mat")
 
