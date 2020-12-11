@@ -55,9 +55,7 @@ for k=1:nb_step
    
    %R Hand
    Wrist=motion.J10(1:3,k)*1e-3;% wrist position
-   [ F_Wrist(:,k), T_Wrist(:,k),Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.R(:,k),Hand.vel.R(:,k),Hand.acc.R(:,k),Wrist);
-   F(:,k)=F(:,k)+F_Wrist(:,k);
-   T(:,k)=T(:,k)+T_Wrist(:,k);
+   [F_Wrist(:,k), T_Wrist(:,k),Ec,Ep]=NE_one_body(zeros(3,1),zeros(3,1),Hand,Hand.pos.R(:,k),Hand.vel.R(:,k),Hand.acc.R(:,k),Wrist);
    %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
    %R Forearm
@@ -66,8 +64,6 @@ for k=1:nb_step
    Ti=T_Wrist(:,k)+cross(Wrist-Elbow,Fi); %expressing previous torques at the elbow point
    
    [F_Elbow(:,k),T_Elbow(:,k),Ec,Ep]=NE_one_body(Fi,Ti,Forearm,Forearm.pos.R(:,k),Forearm.vel.R(:,k),Forearm.acc.R(:,k),Elbow);
-   F(:,k)=F(:,k)+F_Elbow(:,k);
-   T(:,k)=T(:,k)+T_Elbow(:,k);
    %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
    
@@ -77,8 +73,6 @@ for k=1:nb_step
    Ti=T_Elbow(:,k)+cross(Elbow-Shoulder,Fi); %expressing previous torques at the shoulder point
    
    [F_Shoulder(:,k),T_Shoulder(:,k),Ec,Ep]=NE_one_body(Fi,Ti,Upperarm,Upperarm.pos.R(:,k),Upperarm.vel.R(:,k),Upperarm.acc.R(:,k),Shoulder);
-   F(:,k)=F(:,k)+F_Shoulder(:,k);
-   T(:,k)=T(:,k)+T_Shoulder(:,k);
    %E(k)=E(k)+Ec; U(k)=U(k)+Ep;
 
  
@@ -230,36 +224,50 @@ for k=1:nb_step
     T3_Shoulder=T_Shoulder'*(Rz_trunk*rot_x(Euler_Shoulder(1,k))*rot_y(Euler_Shoulder(2,k))*z);
 end
 
+ti=motion.time(1);
+tf=motion.time(end);
+
 %% Ploting 2
 subplot(3,3,1)
 yyaxis right
 plot(motion.time,T1_Shoulder,'displayname',"Torque")
-ylabel("")
+ylabel("Torque (N.m)")
+axis([ti tf -10 5])
 yyaxis left
 plot(motion.time,Euler_Shoulder(1,:),'displayname',"Angle")
+axis([ti tf 2 4])
 xlabel("Times (s)")
 ylabel("Angle (rad)")
 title("x1 Shoulder")
+grid on
 legend show
 
 subplot(3,3,2)
 yyaxis right
 plot(motion.time,T2_Shoulder,'displayname',"Torque")
+ylabel("Torque (N.m)")
+axis([ti tf -30 0])
 yyaxis left
 plot(motion.time,Euler_Shoulder(2,:),'displayname',"Angle")
+axis([ti tf -0.1 0.4])
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("y2 Shoulder")
+grid on
 legend show
 
 subplot(3,3,3)
 yyaxis right
 plot(motion.time,T3_Shoulder,'displayname',"Torque")
+axis([ti tf 0 15])
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Shoulder(3,:),'displayname',"Angle")
+axis([ti tf -3.5 -2.5])
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("z3 Shoulder")
+grid on
 legend show
 
 
@@ -267,31 +275,39 @@ legend show
 subplot(3,3,4)
 yyaxis right
 plot(motion.time,T1_Elbow,'displayname',"Torque")
+axis([ti tf -2 5])
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Elbow(1,:),'displayname',"Angle")
+axis([ti tf 0.1 0.7])
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("x1 Elbow")
+grid on
 legend show
 
 subplot(3,3,5)
 yyaxis right
 plot(motion.time,T2_Elbow,'displayname',"Torque")
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Elbow(2,:),'displayname',"Angle")
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("y2 Elbow")
+grid on
 legend show
 
 subplot(3,3,6)
 yyaxis right
 plot(motion.time,T3_Elbow,'displayname',"Torque")
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Elbow(3,:),'displayname',"Angle")
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("z3 Elbow")
+grid on
 legend show
 
 
@@ -299,29 +315,35 @@ legend show
 subplot(3,3,7)
 yyaxis right
 plot(motion.time,T1_Wrist,'displayname',"Torque")
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Wrist(1,:),'displayname',"Angle")
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("x1 Wrist")
+grid on
 legend show
 
 subplot(3,3,8)
 yyaxis right
 plot(motion.time,T2_Wrist,'displayname',"Torque")
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Wrist(2,:),'displayname',"Angle")
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("y2 Wrist")
+grid on
 legend show
 
 subplot(3,3,9)
 yyaxis right
 plot(motion.time,T3_Wrist,'displayname',"Torque")
+ylabel("Torque (N.m)")
 yyaxis left
 plot(motion.time,Euler_Wrist(3,:),'displayname',"Angle")
 ylabel("Angle (rad)")
 xlabel("Times (s)")
 title("z3 Wrist")
+grid on
 legend show
