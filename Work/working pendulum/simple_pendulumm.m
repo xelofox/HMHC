@@ -150,14 +150,15 @@ F_ = F_1 + F_2 + F_3 - F_g;
 T_g = cross([x y 0],[0 -m_*g_ 0]); %T = cross(l2,m*g)
 %%Inner Torques
 T_1 = (m_*l_^2) * [0 0 (q_dd)]; %T = I*w'
-T_2 = cross([(x) (y) 0],[xdd ydd 0]); %T = cross(ms,a)
+T_2 = cross([(x) (y) 0],[xdd ydd 0]); %T = cross(s,a)
 T_ = T_1 + T_2 - T_g;
 T_ = simplify(T_(3));
 
 %% Energy
 M = m_*eye(3);
 I = [0 0 0 ; 0 0 0 ; 0 0 m_*l_^2];
-msi = [0 x -y ; -x 0 0 ; y 0 0];
+%msi = m*[0 x -y ; -x 0 0 ; y 0 0];
+msi=m_*mrot([x,y,0]);
 
 E_ = 1/2 * [xd yd 0 0 0 q_d] * [M msi' ; msi I] * [xd ; yd ; 0 ; q_d ; 0 ; 0];
 U_ = m_ * g_ * y;

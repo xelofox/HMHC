@@ -253,7 +253,8 @@ T1_ = simplify(T1_(3));
 %% Energy Body 2
 M2 = m2_*eye(3);
 I2 = [0 0 0 ; 0 0 0 ; 0 0 m2_*l2_^2];
-msi2 = [0 (x2-x1) -(y2-y1) ; -(x2-x1) 0 0 ; (y2-y1) 0 0];
+%msi2 = [0 (x2-x1) -(y2-y1) ; -(x2-x1) 0 0 ; (y2-y1) 0 0];
+msi2=m2*mrot([x2-x1,y2-y1,0]);
 
 E2_ = 1/2 * [x2d y2d 0 q2_d 0 0] * [M2 msi2' ; msi2 I2] * [x2d ; y2d ; 0 ; q2_d ; 0 ; 0];
 U2_ = m2_ * g_ * y2;
@@ -261,7 +262,8 @@ U2_ = m2_ * g_ * y2;
 %% Energy Body 1
 M1 = m1_*eye(3);
 I1 = [0 0 0 ; 0 0 0 ; 0 0 m1_*l1_^2];
-msi1 = [0 x1 -y1 ; -x1 0 0 ; y1 0 0];
+%msi1 = [0 x1 -y1 ; -x1 0 0 ; y1 0 0];
+msi1=m1*mrot([x1, y1, 0]);
 
 E1_ = 1/2 * [x1d y1d 0 0 0 q1_d] * [M1 msi1' ; msi1 I1] * [x1d ; y1d ; 0 ; 0 ; 0 ; q1_d];
 U1_ = m1_ * g_ * y1;

@@ -1,4 +1,4 @@
-%establish the antisymetric matrix of a vector
+%establish the skew-symmetric matrix of a vector
 function mat = mrot(v)
 x=v(1);
 y=v(2);
