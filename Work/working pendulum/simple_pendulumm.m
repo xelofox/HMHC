@@ -76,30 +76,35 @@ for t = 1:1:t_size
 clf
 
 nexttile([3 3])
+title('Animation','fontsize',14)
 hold on
 axis([-l-0.2 +l+0.2 -l-0.2 +l+0.2])
 x = cos(q(t)+pi/2);
 y = sin(q(t)+pi/2);
 circle(x*l, y*l,0.1)
 plot([0 x*(l-0.1)], [0 y*(l-0.1)])
-title('Animation')
 hold off
 
 % Torque plot
 nexttile([2 2])
+title('Torque','fontsize',14)
+xlabel('Time(cs)');
+ylabel('Torque(N·m)');
 hold on
 xmax = t_size;
 ymax = max(T);
 ymin = min(T);
 axis([0 xmax ymin ymax])
 plot(T(1:t))
-title('Torque')
 hold off
 
 
 % Force plot
 nexttile([2 2])
-title('Force')
+title('Force','fontsize',14)
+
+xlabel('Time(cs)');
+ylabel('Force(N)');
 hold on
 xmax = t_size;
 ymax = max(max(Fx),max(Fy));
@@ -107,9 +112,8 @@ ymin = min(min(Fx),min(Fy));
 axis([0 xmax ymin ymax])
 plot(Fx(1:t))
 plot(Fy(1:t))
-hold off
 legend('F x','F y')
-
+hold off
 pause(period)
 
 end

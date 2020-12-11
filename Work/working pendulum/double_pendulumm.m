@@ -119,6 +119,7 @@ for t = 1:1:t_size
 clf
 
 nexttile([3 3])
+title('Animation','fontsize',14)
 hold on
 axis([-l1-l2-0.2 +l1+l2+0.2 -l1-l2-0.2 +l1+l2+0.2])
 x1 = cos(q1(t)+pi/2);
@@ -129,35 +130,39 @@ circle(x1*l1, y1*l1,0.1)
 circle(x1*l1+x2*l2,y1*l1+y2*l2,0.1)
 plot([0 x1*(l1-0.1)], [0 y1*(l1-0.1)])
 plot([x1*(l1)+x2*0.1 x1*l1+x2*(l2-0.1)], [y1*(l1)+y2*0.1 y1*l1+y2*(l2-0.1)]);
-%axis([-l1-l2-0.2 +l1+l2+0.2 -l1-l2-0.2 +l1+l2+0.2])
-title('Animation')
 hold off
 
 % Torque1 plot
 nexttile([2 2])
+title('Torque 1','fontsize',14)
+xlabel('Time(cs)');
+ylabel('Torque(N·m)');
 hold on
 xmax = t_size;
 ymax = max(T1);
 ymin = min(T1);
 axis([0 xmax ymin ymax])
 plot(T1(1:t))
-title('Torque 1')
 hold off
 
 % Torque2 plot
 nexttile([2 2])
+title('Torque 2','fontsize',14)
+xlabel('Time(cs)');
+ylabel('Torque(N·m)');
 hold on
 xmax = t_size;
 ymax = max(T2);
 ymin = min(T2);
 axis([0 xmax ymin ymax])
 plot(T2(1:t))
-title('Torque 2')
 hold off
 
 % Force1 plot
 nexttile([2 2])
-title('Force 1')
+title('Force 1','fontsize',14)
+xlabel('Time(cs)');
+ylabel('Force(N)');
 hold on
 xmax = t_size;
 ymax = max(max(F1x),max(F1y));
@@ -170,7 +175,9 @@ hold off
 
 % Force2 plot
 nexttile([2 2])
-title('Force 2')
+title('Force 2','fontsize',14)
+xlabel('Time(cs)');
+ylabel('Force(N)');
 hold on
 xmax = t_size;
 ymax = max(max(F2x),max(F2y));
