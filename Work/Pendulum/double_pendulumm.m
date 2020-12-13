@@ -119,7 +119,7 @@ for t = 1:1:t_size
 clf
 
 nexttile([3 3])
-title('Animation','fontsize',14)
+title('Animation','fontsize',18)
 hold on
 axis([-l1-l2-0.2 +l1+l2+0.2 -l1-l2-0.2 +l1+l2+0.2])
 x1 = cos(q1(t)+pi/2);
@@ -134,9 +134,9 @@ hold off
 
 % Torque1 plot
 nexttile([2 2])
-title('Torque 1','fontsize',14)
-xlabel('Time(cs)');
-ylabel('Torque(N·m)');
+title('Torque 1','fontsize',18)
+xlabel('Time(cs)','fontsize',14);
+ylabel('Torque(N·m)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(T1);
@@ -147,9 +147,9 @@ hold off
 
 % Torque2 plot
 nexttile([2 2])
-title('Torque 2','fontsize',14)
-xlabel('Time(cs)');
-ylabel('Torque(N·m)');
+title('Torque 2','fontsize',18)
+xlabel('Time(cs)','fontsize',14);
+ylabel('Torque(N·m)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(T2);
@@ -160,9 +160,9 @@ hold off
 
 % Force1 plot
 nexttile([2 2])
-title('Force 1','fontsize',14)
-xlabel('Time(cs)');
-ylabel('Force(N)');
+title('Force 1','fontsize',18)
+xlabel('Time(cs)','fontsize',14);
+ylabel('Force(N)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(max(F1x),max(F1y));
@@ -175,9 +175,9 @@ hold off
 
 % Force2 plot
 nexttile([2 2])
-title('Force 2','fontsize',14)
-xlabel('Time(cs)');
-ylabel('Force(N)');
+title('Force 2','fontsize',18)
+xlabel('Time(cs)','fontsize',14);
+ylabel('Force(N)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(max(F2x),max(F2y));
@@ -261,7 +261,7 @@ T1_ = simplify(T1_(3));
 M2 = m2_*eye(3);
 I2 = [0 0 0 ; 0 0 0 ; 0 0 m2_*l2_^2];
 %msi2 = [0 (x2-x1) -(y2-y1) ; -(x2-x1) 0 0 ; (y2-y1) 0 0];
-msi2=m2*mrot([x2-x1,y2-y1,0]);
+msi2 = m2_ * mrot([x2-x1,y2-y1,0]);
 
 E2_ = 1/2 * [x2d y2d 0 q2_d 0 0] * [M2 msi2' ; msi2 I2] * [x2d ; y2d ; 0 ; q2_d ; 0 ; 0];
 U2_ = m2_ * g_ * y2;
@@ -269,8 +269,8 @@ U2_ = m2_ * g_ * y2;
 %% Energy Body 1
 M1 = m1_*eye(3);
 I1 = [0 0 0 ; 0 0 0 ; 0 0 m1_*l1_^2];
-%msi1 = [0 x1 -y1 ; -x1 0 0 ; y1 0 0];
-msi1=m1*mrot([x1, y1, 0]);
+%msi1 = m1_ * [0 x1 -y1 ; -x1 0 0 ; y1 0 0];
+msi1 = m1_ * mrot([x1, y1, 0]);
 
 E1_ = 1/2 * [x1d y1d 0 0 0 q1_d] * [M1 msi1' ; msi1 I1] * [x1d ; y1d ; 0 ; 0 ; 0 ; q1_d];
 U1_ = m1_ * g_ * y1;

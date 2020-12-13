@@ -76,7 +76,7 @@ for t = 1:1:t_size
 clf
 
 nexttile([3 3])
-title('Animation','fontsize',14)
+title('Animation','fontsize',18)
 hold on
 axis([-l-0.2 +l+0.2 -l-0.2 +l+0.2])
 x = cos(q(t)+pi/2);
@@ -87,9 +87,9 @@ hold off
 
 % Torque plot
 nexttile([2 2])
-title('Torque','fontsize',14)
-xlabel('Time(cs)');
-ylabel('Torque(N·m)');
+title('Torque','fontsize',18)
+xlabel('Time(cs)','fontsize',14);
+ylabel('Torque(N·m)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(T);
@@ -101,10 +101,10 @@ hold off
 
 % Force plot
 nexttile([2 2])
-title('Force','fontsize',14)
+title('Force','fontsize',18)
 
-xlabel('Time(cs)');
-ylabel('Force(N)');
+xlabel('Time(cs)','fontsize',14);
+ylabel('Force(N)','fontsize',14);
 hold on
 xmax = t_size;
 ymax = max(max(Fx),max(Fy));
@@ -161,8 +161,8 @@ T_ = simplify(T_(3));
 %% Energy
 M = m_*eye(3);
 I = [0 0 0 ; 0 0 0 ; 0 0 m_*l_^2];
-%msi = m*[0 x -y ; -x 0 0 ; y 0 0];
-msi=m_*mrot([x,y,0]);
+%msi = m_*[0 x -y ; -x 0 0 ; y 0 0];
+msi = m_ * mrot([x,y,0]);
 
 E_ = 1/2 * [xd yd 0 0 0 q_d] * [M msi' ; msi I] * [xd ; yd ; 0 ; q_d ; 0 ; 0];
 U_ = m_ * g_ * y;
