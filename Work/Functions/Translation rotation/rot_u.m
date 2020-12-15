@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 
 function R=rot_u(u,theta)
 

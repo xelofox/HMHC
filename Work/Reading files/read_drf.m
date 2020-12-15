@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 %first: a cell contains the positions and orientation (6 dof) for the 17 segments
 %second: unknown use of the value
 %third: marker position and orientation

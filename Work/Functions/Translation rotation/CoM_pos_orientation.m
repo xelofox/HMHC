@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 function t=CoM_pos_orientation(segment,q)
 global Head U_Trunk M_Trunk L_Trunk Upperarm Forearm Hand Thigh Shank Foot %#ok<NUSED>
 x=[1;0;0] ; y=[0;1;0] ; z=[0;0;1];

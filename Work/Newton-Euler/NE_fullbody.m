@@ -1,10 +1,8 @@
-%Made by Nicolas Testard if there is any question
 clear; %close all;
 
 %The variable "Motion" describes the motion that we want to perform with
 %the simulator
-%Select motion
-Motion="maxJump";
+Motion="slowArm";
 %We execute the "Hanavan" function that loads the body parameters
 Hanavan;
 %we load the motion file associated to the filename choosen before

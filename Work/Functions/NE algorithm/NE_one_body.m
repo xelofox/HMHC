@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 %Inputs
 %   Fj = External Force applied to the body
 %   Tj = External Torque applied to the body

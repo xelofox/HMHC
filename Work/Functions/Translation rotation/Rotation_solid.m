@@ -1,5 +1,4 @@
-%Made by Nicolas Testard if there is any question
-
+%Put initial orientation of the solid in animation
 function [X1,Y1,Z1]=Rotation_solid(X,Y,Z,rx,ry,rz)
 X1=X; Y1=Y; Z1=Z;
 R=rot_x(rx)*rot_y(ry)*rot_z(rz);

@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 
 function [X,Y,Z]=elliptical(a0,b0,a1,b1,L)
 

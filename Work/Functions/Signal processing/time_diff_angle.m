@@ -50,9 +50,6 @@ for k=1:nb_step
     Ry=rot_x(Euler_angle(1,k))*rot_y(Euler_angle(2,k));
     %Rz=rot_x(q(4,k)*pi/180)*rot_y(q(5,k)*pi/180)*rot_z(q(6,k)*pi/180);
     
-    %Rx=rot_x(q(4,k)*pi/180)*R_ini(segment);
-    %Ry=rot_x(q(4,k)*pi/180)*rot_y(q(5,k)*pi/180)*R_ini(segment);
-    
     Omega(:,k)=Euler_vel(1,k)*x + Euler_vel(2,k)*Rx*y + Euler_vel(3,k)*Ry*z;
 end
 

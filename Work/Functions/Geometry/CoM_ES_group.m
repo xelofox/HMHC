@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 
 %We use the equations of pg 128
 function CoM=CoM_ES_group(segment)

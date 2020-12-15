@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 
 %This parameters are used to compute the inertia for ES group bodies
 %according to the eqautions on pg 128

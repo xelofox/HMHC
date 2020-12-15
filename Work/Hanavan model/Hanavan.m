@@ -1,4 +1,3 @@
-%Made by Nicolas Testard if there is any question
 global Head U_Trunk M_Trunk L_Trunk Upperarm Forearm Hand Thigh Shank Foot
 %% Hanavan parameters
 % list of the 41 mean values according to the Hanavan Model (pg 138)
@@ -176,16 +175,16 @@ Vtot=2*Hand.volume+2*Forearm.volume+2*Upperarm.volume+2*Foot.volume+2*Shank.volu
 Mtot=80;
 P=P*100; % Appropriate values to use when applying lesson prediction mass formula?
 
-Hand.m=Mtot*Hand.volume/Vtot;
-Forearm.m=Mtot*Forearm.volume/Vtot;
-Upperarm.m=Mtot*Upperarm.volume/Vtot;
-Foot.m=Mtot*Foot.volume/Vtot;
-Shank.m=Mtot*Shank.volume/Vtot;
-Thigh.m=Mtot*Thigh.volume/Vtot;
-Head.m=Mtot*Head.volume/Vtot;
-U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
-M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
-L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
+% Hand.m=Mtot*Hand.volume/Vtot;
+% Forearm.m=Mtot*Forearm.volume/Vtot;
+% Upperarm.m=Mtot*Upperarm.volume/Vtot;
+% Foot.m=Mtot*Foot.volume/Vtot;
+% Shank.m=Mtot*Shank.volume/Vtot;
+% Thigh.m=Mtot*Thigh.volume/Vtot;
+% Head.m=Mtot*Head.volume/Vtot;
+% U_Trunk.m=Mtot*U_Trunk.volume/Vtot;
+% M_Trunk.m=Mtot*M_Trunk.volume/Vtot;
+% L_Trunk.m=Mtot*L_Trunk.volume/Vtot;
 
 Hand.m=0.038*P(15) + 0.080*P(32) - 0.660;
 Forearm.m= 0.081*Mtot + 0.052*P(16) - 1.650;

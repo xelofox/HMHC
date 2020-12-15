@@ -1,3 +1,4 @@
+%Initial orientation of the bodies
 function R=R_ini(segment)
 
 R=eye(3);
