@@ -20,8 +20,13 @@ load(Motion+"_ground.mat")
 % vectors as values inside the time array.
 
 
-% The kinematic function returns us the angular et linear position, velocity 
-% and acceleration of the CoM of the body
+
+%Here we compute the discrete time derivative and the discrete double time 
+%derivative of the J vector using the time array for the increment
+
+
+% The kinematic function returns us the angular position, angular velocity 
+% and angular orientation of the CoM of the body
 [Head.pos,Head.vel,Head.acc]=kinematic(Head,motion.time,motion.J4);
 [U_Trunk.pos,U_Trunk.vel,U_Trunk.acc]=kinematic(U_Trunk,motion.time,motion.J3);
 [M_Trunk.pos,M_Trunk.vel,M_Trunk.acc]=kinematic(M_Trunk,motion.time,motion.J2);
@@ -174,6 +179,8 @@ end
 % dt=motion.time(2)-motion.time(1);
 % [B,A] = butter(2,5*2*dt);
 % T_CoP(3,:)=filtfilt(B,A,T_CoP(3,:));
+
+
 
 figure
 plot_comparison(ground.time,[ground.Fx';ground.Fy';ground.Fz';ground.T_CoP],...

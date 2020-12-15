@@ -119,16 +119,16 @@ xlabel("Time (s)")
 ylabel("Torque (N.m)")
 grid on
 
-for k=1:4
-    subplot(2,2,k)
-    i=k;
-    if k==4
-        i=6;
-    end
-    M=max( max(W1(i,:)), max(W2(i,:))   )*1.4;
-    m=min( min(W1(i,:)), min(W2(i,:))   )*1.4;
-    m=m*(-sign(m));
-    axis([12.2 15 m M]) %slowArm
-    %axis([7 10.5 m M]) %mediumArm
-    %axis([7.5 9.5 m M]) %fastArm
-end
+% for k=1:4
+%     subplot(2,2,k)
+%     i=k;
+%     if k==4
+%         i=6;
+%     end
+%     M=max( max(W1(i,:)), max(W2(i,:))   )*1.4;
+%     m=min( min(W1(i,:)), min(W2(i,:))   )*1.4;
+%     m=m*(-sign(m));
+%     axis([12.2 15 m M]) %slowArm
+%     %axis([7 10.5 m M]) %mediumArm
+%     %axis([7.5 9.5 m M]) %fastArm
+% end

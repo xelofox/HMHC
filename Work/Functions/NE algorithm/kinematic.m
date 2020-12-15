@@ -15,7 +15,7 @@ end
 
 %% Computation of the marker vel and acc
 marker_pos=q(1:3,:)*1e-3;
-[marker_vel,marker_acc]=time_diff(marker_pos,t);
+[frame_vel,frame_acc]=time_diff(marker_pos,t);
 %marker_vel=marker_vel*0;
 %marker_acc=marker_acc*0;
 
@@ -27,8 +27,8 @@ CoM_acc=CoM_vel;
 for k=1:nb_step
     CoM_pos=pos(1:3,k);
     S=CoM_pos-marker_pos(1:3,k);
-    CoM_vel(:,k)=marker_vel(:,k)+cross(Omega(:,k),S);
-    CoM_acc(:,k)=marker_acc(:,k)+cross(Omega_d(:,k),S)+mrot(Omega(:,k))*cross(Omega(:,k),S);
+    CoM_vel(:,k)=frame_vel(:,k)+cross(Omega(:,k),S);
+    CoM_acc(:,k)=frame_acc(:,k)+cross(Omega_d(:,k),S)+mrot(Omega(:,k))*cross(Omega(:,k),S);
 end
 
 %CoM_vel=zeros(3,nb_step);CoM_acc=CoM_vel;

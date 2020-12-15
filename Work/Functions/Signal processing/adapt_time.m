@@ -18,7 +18,7 @@ elseif Motion=="fastKickArm"
 elseif Motion=="jumpFeetUp"
     newTime=time-time(1)+1.00;
 elseif Motion=="maxJump"
-    newTime=time-time(1)+1.7;
+    newTime=time-time(1)+1.4;
 elseif Motion=="mediumArm"
     newTime=time-time(1)+2.35;
 elseif Motion=="mediumArmNOSTOMP"
