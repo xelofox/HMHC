@@ -1,4 +1,4 @@
-clear; %close all;
+clear; close all;
 
 %The variable "Motion" describes the motion that we want to perform with
 %the simulator

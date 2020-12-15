@@ -1,4 +1,4 @@
-clear; %close all;
+clear; close all;
 %Only forces for now
 
 
